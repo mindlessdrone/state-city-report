@@ -10,8 +10,8 @@ City:
 State:
     + State(String name)
     + boolean addCity(City city)
-    + void modifyCity(int index, String name, int pop)
-    + void removeCity(int index)
+    + boolean modifyCity(int index, String name, int pop)
+    + boolean removeCity(int index)
     + String getName()
     + void setName(String newName)
     + int getPopulation()
@@ -23,4 +23,5 @@ State:
     - City[] cities
     - String name
     - int population
+    - int numCities
 
