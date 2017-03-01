@@ -13,6 +13,7 @@ State:
     + void modifyCity(int index, String name, int pop)
     + void removeCity(int index)
     + String getName()
+    + void setName(String newName)
     + int getPopulation()
     + int numOfCities()
     + City getCity(int index)
