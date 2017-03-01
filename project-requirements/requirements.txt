@@ -1,0 +1,71 @@
+INPUTS
+
+File (text file)
+format
+
+STATE NAME
+city_1   pop_1
+city_2   pop_2
+...
+city_n   pop_n
+
+ex.
+New York
+Syracuse    400
+Buffalo     800
+California
+San Fransisco   300
+
+PROCESSING
+
+- Maintain sorting of states by total population
+- Maintain sorting of cities by population (grouped by state)
+- Modify state information (name)
+- Modify city information (name or pop)
+- Add cities
+- Remove cities
+- Error handling
+    - Invalid menu choices
+    - File errors (not found, read/write issues)
+    - Too many states/cities added
+    - File format errors (population is not a number or negative)
+
+OUTPUTS
+
+File (text file) - states sorted by total population, cities sorted by population
+Format
+
+STATE NAME
+city_1  pop_1
+city_2  pop_2
+...
+city_n  pop_n
+
+STATE NAME
+city_1  pop_1
+city_2  pop_2
+...
+city_n  pop_n
+
+States reports to screen
+ex.
+
+    States by population
+state_1:     pop_1
+state_2:     pop_2
+...
+state_n:    pop_n
+
+Error Messages:
+    Invalid selections
+    File not found.
+    File cannot be read.
+    File cannot be written.
+    State/city capacity reached.
+    File format is invalid.
+    Invalid entry.
+
+CONSTRAINTS
+max state amount: 50
+max city amount: 30
+population amounts must be positive
