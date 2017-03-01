@@ -1,0 +1,25 @@
+City:
+    + City(String name, int population)
+    + String getName()
+    + int getPopulation()
+    + String toString()
+------------------------------------------
+    - String name
+    - int population
+
+State:
+    + State(String name)
+    + boolean addCity(City city)
+    + void modifyCity(int index, String name, int pop)
+    + void removeCity(int index)
+    + String getName()
+    + int getPopulation()
+    + int numOfCities()
+    + City getCity(int index)
+    + String toString()
+--------------------------------------------
+    + static int MAX_CITIES
+    - City[] cities
+    - String name
+    - int population
+
