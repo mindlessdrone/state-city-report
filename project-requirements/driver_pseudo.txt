@@ -9,8 +9,6 @@ BEGIN StateCityReport
                 Call modifyState
             ELSE IF (choice is MODIFY CITY)
                 Call modifyCity
-            ELSE IF (choice is MODIFY STATE)
-                Call modifyState
             ELSE IF (choice is ADD CITY)
                 Call addCity
             ELSE IF (choice is REMOVE CITY)
@@ -63,4 +61,36 @@ BEGIN readFile
     END WHILE
 END readFile
 
+BEGIN modifyState
+    Display list of states of modify
+    Prompt user for choice
+    Input choice
+    WHILE (choice is not QUIT)
+        Prompt user for new name
+        Input newName
+        IF (new name is not blank)
+            Modify selected state name
+        END IF
+        Display list of states of modify
+        Prompt user for choice
+        Input choice
+    END WHILE
+END modifyState
 
+BEGIN modifyCity
+END modifyCity
+
+BEGIN addCity
+END addCity
+
+BEGIN removeCity
+END removeCity
+
+BEGIN produceReport
+    Prompt user for file to write to
+    Input fileName
+    FOR (state in states)
+        Display total/states city report
+        Write state name and population to fileName
+    END FOR
+END produceReport
