@@ -1,0 +1,66 @@
+BEGIN StateCityReport
+    Display menu
+    Get menu choice from user
+    WHILE (choice is not quit)
+        IF (choice is valid)
+            IF (choice is READ FILE)
+                Call readFile
+            ELSE IF (choice is MODIFY STATE)
+                Call modifyState
+            ELSE IF (choice is MODIFY CITY)
+                Call modifyCity
+            ELSE IF (choice is MODIFY STATE)
+                Call modifyState
+            ELSE IF (choice is ADD CITY)
+                Call addCity
+            ELSE IF (choice is REMOVE CITY)
+                Call removeCity
+            ELSE IF (choice is PRODUCE REPORT)
+                Call produceReport
+            END IF
+        ELSE
+            Display invalid choice error
+        END IF
+        Display menu
+        Get menu choice from user
+    END WHILE
+END StateCityReport
+
+BEGIN readFile
+    Prompt user for file to read
+    Input fileName
+    WHILE (fileName is not quit)
+        IF (fileName exists)
+            state = null
+            Read line from file
+            WHILE (line is not null)
+                Split line into tokens by delim
+                IF (num of tokens is one)
+                    IF (state is not null)
+                        Add state to states
+                        Increment numOfStates
+                    END IF
+                    name = first Token
+                    state = new state with name
+                ELSE IF (num of tokens is two)
+                    name = first token
+                    IF (second token is numeric)
+                        population = second token
+                        Call addCity
+                    ELSE
+                        Display malformed line error
+                    END IF
+                ELSE
+                    Display malformed line error
+                END IF
+                Read line from file
+            END WHILE
+        ELSE
+            Display file not found error
+        END IF
+        Prompt user for file to read
+        Input fileName
+    END WHILE
+END readFile
+
+
