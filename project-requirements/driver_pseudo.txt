@@ -35,8 +35,12 @@ BEGIN readFile
                 Split line into tokens by delim
                 IF (num of tokens is one)
                     IF (state is not null)
-                        Add state to states
-                        Increment numOfStates
+                        IF (states is not full)
+                            Add state to states
+                            Increment numOfStates
+                        ELSE
+                            Display states full error
+                        END IF
                     END IF
                     name = first Token
                     state = new state with name
