@@ -78,12 +78,80 @@ BEGIN modifyState
 END modifyState
 
 BEGIN modifyCity
+    Display a list of states to user
+    Prompt user for choice
+    Input choice
+    WHILE (choice is not quit)
+        Display of list of cities for user to modify
+        Prompt user for choice
+        Input cityChoice
+        WHILE (cityChoice is not quit)
+            city = get ith city in state
+            name = city name
+            pop = city pop
+            Prompt user for new name
+            Input newName
+            IF (newName is not blank)
+                name = new name
+            END IF
+            Prompt user for new population
+            Input newPop
+            IF (newPop is not blank)
+                pop = newPop
+            END IF
+            Modify selected city with pop and name
+            Display of list of cities for user to modify
+            Prompt user for choice
+            Input cityChoice
+        END WHILE
+        -- RE-SORT states array --
+        Display a list of states to user
+        Prompt user for choice
+        Input choice
+    END WHILE
 END modifyCity
 
 BEGIN addCity
+    Display a list of states to user
+    Prompt user for choice
+    Input choice
+    WHILE (choice is not quit)
+        Display of list of cities in state
+        Prompt user for new city name
+        Input newCityName
+        WHILE (newCityName is not quit)
+            Prompt user for new city population
+            Input newCityPopulation
+            newCity = new City with newCityName and newCityPopulation
+            Add newCity to state
+            Prompt user for new city name
+            Input newCityName
+        END WHILE
+        -- RE-SORT states array --
+        Display a list of states to user
+        Prompt user for choice
+        Input choice
+    END WHILE
 END addCity
 
 BEGIN removeCity
+    Display a list of states to user
+    Prompt user for choice
+    Input choice
+    WHILE (choice is not quit)
+        Display of list of cities for user to modify
+        Prompt user for choice
+        Input cityChoice
+        WHILE (cityChoice is not quit)
+            
+            Display of list of cities for user to modify
+            Prompt user for choice
+            Input cityChoice
+        END WHILE
+        Display a list of states to user
+        Prompt user for choice
+        Input choice
+    END WHILE
 END removeCity
 
 BEGIN produceReport
