@@ -1,49 +1,34 @@
 BEGIN StateCityReport
-    Display menu
     Get menu choice from user
     WHILE (choice is not quit)
-        IF (choice is valid)
-            IF (choice is READ FILE)
-                Call readFile
-            ELSE IF (choice is MODIFY STATE)
-                Call modifyState
-            ELSE IF (choice is MODIFY CITY)
-                Call modifyCity
-            ELSE IF (choice is ADD CITY)
-                Call addCity
-            ELSE IF (choice is REMOVE CITY)
-                Call removeCity
-            ELSE IF (choice is PRODUCE REPORT)
-                Call produceReport
-            END IF
+        IF (choice is READ FILE)
+            Call readFile
+        ELSE IF (choice is MODIFY STATE)
+            Call modifyState
+        ELSE IF (choice is MODIFY CITY)
+            Call modifyCity
+        ELSE IF (choice is REMOVE CITY)
+            Call removeCity
+        ELSE IF (choice is PRODUCE REPORT)
+            Call produceReport
         ELSE
             Display invalid choice error
         END IF
-        Display menu
         Get menu choice from user
     END WHILE
 END StateCityReport
 
-BEGIN readFile
+BEGIN readFile(states[], count)
     Prompt user for file to read
     Input fileName
+    Init count = 0
     WHILE (fileName is not quit)
         IF (fileName exists)
-            state = null
             Read line from file
             WHILE (line is not null)
                 Split line into tokens by delim
                 IF (num of tokens is one)
-                    IF (state is not null)
-                        IF (states is not full)
-                            Add state to states
-                            Increment numOfStates
-                        ELSE
-                            Display states full error
-                        END IF
-                    END IF
-                    name = first Token
-                    state = new state with name
+                    IF (states is not
                 ELSE IF (num of tokens is two)
                     name = first token
                     IF (second token is numeric)
@@ -126,33 +111,6 @@ BEGIN modifyCity
         Input choice
     END WHILE
 END modifyCity
-
-BEGIN addCity
-    Display a list of states to user
-    Prompt user for choice
-    Input choice
-    WHILE (choice is not quit)
-        IF (choice is valid)
-            Display of list of cities in state
-            Prompt user for new city name
-            Input newCityName
-            WHILE (newCityName is not quit)
-                Prompt user for new city population
-                Input newCityPopulation
-                newCity = new City with newCityName and newCityPopulation
-                Add newCity to state
-                Prompt user for new city name
-                Input newCityName
-            END WHILE
-            -- RE-SORT states array --
-        ELSE
-            Display invalid state choice error
-        END IF
-        Display a list of states to user
-        Prompt user for choice
-        Input choice
-    END WHILE
-END addCity
 
 BEGIN removeCity
     Display a list of states to user
