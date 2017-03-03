@@ -28,12 +28,29 @@ BEGIN readFile(states[], count)
             WHILE (line is not null)
                 Split line into tokens by delim
                 IF (num of tokens is one)
-                    IF (states is not
+                    name = first token
+                    IF (states is not full)
+                        index = 0
+                        WHILE (states[i].name is not name and index is less than states length)
+                            Increment index
+                        END WHILE
+                        IF (states[index] is null)
+                            states[index] = new state with name
+                            Increment count
+                            index = sortState(states, index) 
+                        END IF
+                    ELSE
+                        Display states full error
+                    END IF
                 ELSE IF (num of tokens is two)
                     name = first token
                     IF (second token is numeric)
                         population = second token
-                        Add city to state
+                        IF (states[index] is not full)
+                            Add city to states[index]
+                        ELSE
+                            Display city list full error
+                        END IF
                     ELSE
                         Display malformed line error
                     END IF
