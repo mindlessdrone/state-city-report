@@ -66,10 +66,14 @@ BEGIN modifyState
     Prompt user for choice
     Input choice
     WHILE (choice is not QUIT)
-        Prompt user for new name
-        Input newName
-        IF (new name is not blank)
-            Modify selected state name
+        IF (choice is valid)
+            Prompt user for new name
+            Input newName
+            IF (new name is not blank)
+                Modify selected state name
+            END IF
+        ELSE
+            Display state choice error
         END IF
         Display list of states of modify
         Prompt user for choice
@@ -82,29 +86,37 @@ BEGIN modifyCity
     Prompt user for choice
     Input choice
     WHILE (choice is not quit)
-        Display of list of cities for user to modify
-        Prompt user for choice
-        Input cityChoice
-        WHILE (cityChoice is not quit)
-            city = get ith city in state
-            name = city name
-            pop = city pop
-            Prompt user for new name
-            Input newName
-            IF (newName is not blank)
-                name = new name
-            END IF
-            Prompt user for new population
-            Input newPop
-            IF (newPop is not blank)
-                pop = newPop
-            END IF
-            Modify selected city with pop and name
+        IF (choice is valid)
             Display of list of cities for user to modify
             Prompt user for choice
             Input cityChoice
-        END WHILE
-        -- RE-SORT states array --
+            WHILE (cityChoice is not quit)
+                IF (cityChoice is valid)
+                    city = get ith city in state
+                    name = city name
+                    pop = city pop
+                    Prompt user for new name
+                    Input newName
+                    IF (newName is not blank)
+                        name = newName
+                    END IF
+                    Prompt user for new population
+                    Input newPop
+                    IF (newPop is not blank)
+                        pop = newPop
+                    END IF
+                    Modify selected city with pop and name
+                ELSE
+                    Display invalid city choice error
+                END IF
+                Display of list of cities for user to modify
+                Prompt user for choice
+                Input cityChoice
+            END WHILE
+            -- RE-SORT states array --
+        ELSE
+            Display invalid state error
+        END IF
         Display a list of states to user
         Prompt user for choice
         Input choice
@@ -116,18 +128,22 @@ BEGIN addCity
     Prompt user for choice
     Input choice
     WHILE (choice is not quit)
-        Display of list of cities in state
-        Prompt user for new city name
-        Input newCityName
-        WHILE (newCityName is not quit)
-            Prompt user for new city population
-            Input newCityPopulation
-            newCity = new City with newCityName and newCityPopulation
-            Add newCity to state
+        IF (choice is valid)
+            Display of list of cities in state
             Prompt user for new city name
             Input newCityName
-        END WHILE
-        -- RE-SORT states array --
+            WHILE (newCityName is not quit)
+                Prompt user for new city population
+                Input newCityPopulation
+                newCity = new City with newCityName and newCityPopulation
+                Add newCity to state
+                Prompt user for new city name
+                Input newCityName
+            END WHILE
+            -- RE-SORT states array --
+        ELSE
+            Display invalid state choice error
+        END IF
         Display a list of states to user
         Prompt user for choice
         Input choice
@@ -139,15 +155,23 @@ BEGIN removeCity
     Prompt user for choice
     Input choice
     WHILE (choice is not quit)
-        Display of list of cities for user to modify
-        Prompt user for choice
-        Input cityChoice
-        WHILE (cityChoice is not quit)
-            
+        IF (choice is valid)
+            Display of list of cities for user to remove
+            Prompt user for choice
+            Input cityChoice
+            WHILE (cityChoice is not quit)
+            IF (cityChoice is valid)
+                Remove selected city from state
+            ELSE
+                Display invalid city error
+            END IF
             Display of list of cities for user to modify
             Prompt user for choice
             Input cityChoice
-        END WHILE
+            END WHILE
+        ELSE
+            Display invalid state choice error
+        END IF
         Display a list of states to user
         Prompt user for choice
         Input choice
