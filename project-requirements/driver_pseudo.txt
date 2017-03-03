@@ -48,7 +48,7 @@ BEGIN readFile
                     name = first token
                     IF (second token is numeric)
                         population = second token
-                        Call addCity
+                        Add city to state
                     ELSE
                         Display malformed line error
                     END IF
