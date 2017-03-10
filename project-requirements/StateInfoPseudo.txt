@@ -1,0 +1,34 @@
+BEGIN addCity(name, population)
+    -- Check if array is full
+    IF (cities is not full)
+        -- Search for city in array (linear search)
+        index = 0
+        city = cities[index]
+        WHILE (name is not city.name and index is less than cities size)
+            Increment index
+            city = cities[index] 
+        END WHILE
+        IF city is null
+            cities[index] = new city with name and population
+            Increment numCities
+            -- Call sorting method to move city to correct location
+            Call sortAddedCity
+        ELSE
+            city.population = population
+        END IF
+    ELSE
+        Return False
+    END IF
+    Return True
+END addCity
+
+BEGIN sortAddedCity
+    -- Insertion sort (O(n))
+    index = numCities - 1
+    city = cities[index]
+    WHILE (cities[index - 1].population is greater than city.population and index is not zero)
+        cities[index] = cities[index - 1]
+        Decrement index
+    END WHILE
+    cities[index] = city
+END sortAddedCity
