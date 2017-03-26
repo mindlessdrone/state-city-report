@@ -4,7 +4,7 @@ BEGIN addCity(name, population)
         -- Search for city in array (linear search)
         index = 0
         city = cities[index]
-        WHILE (name is not city.name and index is less than cities size)
+        WHILE (name is not city.name and index is less than numCities)
             Increment index
             city = cities[index] 
         END WHILE
@@ -12,7 +12,9 @@ BEGIN addCity(name, population)
             cities[index] = new city with name and population
             Increment numCities
             -- Call sorting method to move city to correct location
-            Call sortAddedCity
+            IF (more than one city in cities)
+                Call sortAddedCity(index)
+            END IF
         ELSE
             city.population = population
         END IF
@@ -49,4 +51,9 @@ END IF
 
 BEGIN sortKeyRight(pos)
     key = cities[pos]
+    index = pos
+    WHILE (index is not at rightmost position and key > city to right)
+        cities[index] = cities[index + 1]
+    END WHILE
+    cities[index] = key
 END IF
