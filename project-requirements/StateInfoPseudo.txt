@@ -22,13 +22,31 @@ BEGIN addCity(name, population)
     Return True
 END addCity
 
-BEGIN sortAddedCity
-    -- Insertion sort (O(n))
-    index = numCities - 1
-    city = cities[index]
-    WHILE (cities[index - 1].population is greater than city.population and index is not zero)
-        cities[index] = cities[index - 1]
-        Decrement index
-    END WHILE
-    cities[index] = city
+BEGIN sortAddedCity(pos)
+    city = cities[pos]
+    IF (at leftmost position)
+        Call sortKeyRight(pos)
+    END IF
+    IF (at rightmost position)
+        Call sortKeyLeft(pos)
+    END IF
+    IF (city is greater than city to right)
+        Call sortKeyRight(pos)
+    END IF
+    IF (city is less than city to left)
+        Call sortKeyLeft(pos)
+    END IF
 END sortAddedCity
+
+BEGIN sortKeyLeft(pos)
+    key = cities[pos]
+    index = pos
+    WHILE (index is not at leftmost position and key < city to left)
+        cities[index] = cities[index - 1])
+    END WHILE
+    cities[index] = key
+END IF
+
+BEGIN sortKeyRight(pos)
+    key = cities[pos]
+END IF
