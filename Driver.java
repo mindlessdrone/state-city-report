@@ -22,13 +22,13 @@ public class Driver {
         //local variables
         int choice;
         int numStates = 0;
-        stateInfo[] states = new stateInfo[numStates];
+        stateInfo[] states = new stateInfo[50];
 
         /********************************************/
         choice = menu();
         while (choice != QUIT) {
             if (choice == READ_FILE) {
-                numStates = readFile(numStates);
+                numStates = readFile(numStates, states);
             } else if (choice == MOD_STATE) {
                 modState(numStates,states);
             } else if (choice == MOD_CITY) {
@@ -68,7 +68,7 @@ public class Driver {
         return choice;
     }
 
-    public static int readFile(int numStates) throws IOException {
+    public static int readFile(int numStates, stateInfo[] states) throws IOException {
         final String QUIT = "-1";
 
         BufferedReader br;
@@ -77,28 +77,28 @@ public class Driver {
         String cityName;
         int pop;
         StringTokenizer token;
-        stateInfo states[];
+        //stateInfo states[];
 
         System.out.print("Enter the file's name (or -1 to quit): ");
         fileName = Keyboard.readString();
         br = new BufferedReader(new FileReader(fileName));
 
-        while (fileName != QUIT){
+        while (!fileName.equals(QUIT)){
             if (new File(fileName).exists()){
                 line = br.readLine();
                 while (line != null) {
-                    states = new stateInfo[numStates];
                     token = new StringTokenizer(line, "\t");
                     if (token.countTokens() == 1) {
-                        states[numStates].setStateName(token.nextToken());
+                        states[numStates] = new stateInfo(token.nextToken());
                         numStates++;
                     } else if (token.countTokens() == 2) {
                         cityName = token.nextToken();
                         try {
                             pop = Integer.parseInt(token.nextToken());
-                            states[numStates].addCities(cityName, pop);
-                        } catch (Exception e) {
-                            System.out.print("Population has to be numeric.");
+                            System.out.println(pop);
+                            states[numStates-1].addCities(cityName, pop);
+                        } catch (NumberFormatException e) {
+                            System.err.println("Population has to be a numeric value.");
                         }
                     }
                     line = br.readLine();
