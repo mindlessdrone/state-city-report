@@ -130,7 +130,7 @@ public class Driver {
             System.out.print("Enter the choice of the State you want to modify (or -1 to QUIT):");
             choice = Keyboard.readInt();
             while (choice != QUIT) {
-                if (0 < choice && choice < numState) {
+                if (0 < choice && choice <= numState) {
                     System.out.print("Enter the name will be changed to:");
                     newName = Keyboard.readString();
                     if (newName != null) {
