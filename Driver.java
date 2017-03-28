@@ -96,7 +96,7 @@ public class Driver {
                         try {
                             pop = Integer.parseInt(token.nextToken());
                             System.out.println(pop);
-                            states[numStates-1].addCities(cityName, pop);
+                            states[numStates-1].addCity(cityName, pop);
                         } catch (NumberFormatException e) {
                             System.err.println("Population has to be a numeric value.");
                         }
@@ -116,7 +116,7 @@ public class Driver {
     public static void listStates(int numState, stateInfo states[]){
         System.out.println("\t\t\tThe list of States:");
         for(int i = 0; i < numState; i++){
-            System.out.println("\t\t\t" + (i+1) + states[i]);
+            System.out.println("\t\t\t" + (i+1) + ":\t" +  states[i].getName());
         }
     }
 
@@ -134,7 +134,7 @@ public class Driver {
                     System.out.print("Enter the name will be changed to:");
                     newName = Keyboard.readString();
                     if (newName != null) {
-                        states[choice - 1].setStateName(newName);
+                        states[choice - 1].setName(newName);
                         System.out.print("Changing name is success.");
                     } else {
                         System.out.print("The name is invalid.");
@@ -299,7 +299,7 @@ public class Driver {
                     System.out.print("Before sorting:");
                     listStates(numState, states);
                     for (int i = 0; i < numState; i++) {
-                        states[i] = new stateInfo(states[i].getStateName(), states[i].getStatePop());
+                        states[i] = new stateInfo(states[i].getName(), states[i].getStatePop());
                     }
                     Arrays.sort(states, Comparator.comparing(state -> state.statePop));
                     System.out.print("After sorting:");
@@ -357,7 +357,7 @@ public class Driver {
             bw = new BufferedWriter(new FileWriter(fileName));
             if (fileName != QUIT) {
                 for (int i = 0; i <= numState; i++) {
-                    bw.write(states[i].getStateName() + "   " + states[i].getStatePop());
+                    bw.write(states[i].getName() + "   " + states[i].getStatePop());
                     bw.write(states[i].toString());
                 }
                 System.out.print("The final report file is produced.");
