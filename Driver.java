@@ -37,10 +37,6 @@ public class Driver {
                 rmvState(numStates,states);
             } else if (choice == REMOVE_CITY) {
                 rmvCity(numStates,states);
-            } else if (choice == SORT_STATES) {
-                sortState(numStates,states);
-            } else if (choice == SORT_CITIES) {
-                sortCity(numStates,states);
             } else if (choice == PRODUCE_REPORT) {
                 proReport(numStates,states);
             } else {
@@ -59,8 +55,6 @@ public class Driver {
         System.out.println("\t\t\t3. MODIFY CITY INFORMATION.");
         System.out.println("\t\t\t4. REMOVE STATE.");
         System.out.println("\t\t\t5. REMOVE CITY.");
-        System.out.println("\t\t\t6. SORT STATES.");
-        System.out.println("\t\t\t7. SORT CITIES.");
         System.out.println("\t\t\t8. PRODUCE REPORTS.");
         System.out.println("\t\t\t0. QUIT.");
         choice = Keyboard.readInt();
@@ -95,7 +89,6 @@ public class Driver {
                         cityName = token.nextToken();
                         try {
                             pop = Integer.parseInt(token.nextToken());
-                            System.out.println(pop);
                             states[numStates-1].addCity(cityName, pop);
                         } catch (NumberFormatException e) {
                             System.err.println("Population has to be a numeric value.");
@@ -173,8 +166,8 @@ public class Driver {
                     cityChoice = Keyboard.readInt();
                     while (cityChoice != QUIT) {
                         if (cityChoice < states[choice - 1].getNumCities() && 0 < cityChoice) {
-                            cityName = states[choice - 1].getCity(cityChoice).getCityName();
-                            cityPop = states[choice - 1].getCity(cityChoice).getCityPop();
+                            cityName = states[choice - 1].getCity(cityChoice).getName();
+                            cityPop = states[choice - 1].getCity(cityChoice).getPop();
 
                             System.out.print("Enter the name of the City will be changed to: ");
                             newName = Keyboard.readString();
@@ -184,7 +177,7 @@ public class Driver {
                                 newPop = Keyboard.readInt();
                                 if (newPop >= 0) {
                                     cityPop = newPop;
-                                    result = states[choice - 1].modifyCity(cityName, cityPop, choice - 1);
+                                    result = states[choice - 1].modifyCity(choice - 1, cityName, cityPop);
                                     if (result == true) {
                                         System.out.print("Changing name is success.");
                                     } else {
