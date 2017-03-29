@@ -46,7 +46,7 @@ public class stateInfo {
         return numCities;
     }
 
-    public int getStatePop() {
+    public int getPop() {
         return statePop;
     }
 

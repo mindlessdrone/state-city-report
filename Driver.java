@@ -57,7 +57,8 @@ public class Driver {
     }
 
     public static int readFile(int numStates, stateInfo[] states) throws IOException {
-        
+        // TODO implement readFile
+        return 0;    
     }
 
 
@@ -165,8 +166,67 @@ public class Driver {
         }
     }
 
-    public static void sortState(int numState, stateInfo states[]) {
-    }
+    
+   /**********************************************************
+    * Method Name    : sortState
+    * Author         : Anthony Massicci
+    * Date           : xxxxxxxxxxxxxxxx
+    * Course/Section : CSC264
+    * Program Description: Online insertion sort, places state
+    * at specified position into the correct position in array.
+    *
+    * BEGIN sortState(states, pos)
+    *    key = state at pos
+    *    index = pos
+    *    WHILE (index is not at left most position and key is less than
+    *           value on left)
+    *       Move city on left to current index
+    *       Decrement index
+    *    END WHILE
+    *    WHILE (index is not at right most position and key is
+    *           greater than value on right)
+    *       Move city on right to current index
+    *       Increment index
+    *    END WHILE
+    *    states[index] = key
+    * END sortState
+    **********************************************************/
+    public static void sortState(stateInfo states[], int pos, int numStates) 
+    {
+        // local constants
+        
+        // local variables 
+        stateInfo key = states[pos];    // state to be sorted
+        int index = pos;                // current index
+
+        /**************************START sortState method************************/
+
+        // while index is not at left most position and key is less than value on left
+        while (index > 0 && key.getPop() < states[index - 1].getPop())
+        {
+            // move state on left to current position
+            states[index] = states[index - 1];
+
+            // decrement index
+            index--;
+        } // end while
+
+        // while index is not at right most position 
+        // and key is greater than value on right
+        while (index < numStates && key.getPop() > states[index + 1].getPop())
+        {
+            // move state on right to current position
+            states[index] = states[index + 1];
+
+            // increment index
+            index++;
+
+        } // end while
+
+        // set current position to key
+        states[index] = key;
+
+    } // end sortState
 
     public static void proReport(int numState, stateInfo states[]) throws IOException {
         final String QUIT = "-1";
@@ -180,7 +240,7 @@ public class Driver {
             bw = new BufferedWriter(new FileWriter(fileName));
             if (fileName != QUIT) {
                 for (int i = 0; i <= numState; i++) {
-                    bw.write(states[i].getName() + "   " + states[i].getStatePop());
+                    bw.write(states[i].getName() + "   " + states[i].getPop());
                     bw.write(states[i].toString());
                 }
                 System.out.print("The final report file is produced.");
