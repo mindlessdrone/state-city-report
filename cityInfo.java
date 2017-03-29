@@ -12,11 +12,11 @@ public class cityInfo {
         cityName = name;
     }
 
-    public int getCityPop() {
+    public int getPop() {
         return cityPop;
     }
 
-    public String getCityName() {
+    public String getName() {
         return cityName;
     }
 

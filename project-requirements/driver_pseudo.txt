@@ -65,6 +65,7 @@ BEGIN readFile(states[], count)
         Prompt user for file to read
         Input fileName
     END WHILE
+    Return count
 END readFile
 
 BEGIN modifyState
