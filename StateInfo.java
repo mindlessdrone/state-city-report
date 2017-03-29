@@ -50,13 +50,6 @@ public class stateInfo {
         return statePop;
     }
 
-    /*public void addCity(String name, int pop) {
-        city[numCities] = new cityInfo(name, pop);
-        statePop += pop;
-        numCities++;
-    } */
-
-
    /**********************************************************
     * Method Name    : addCity
     * Author         : Anthony Massicci
@@ -236,34 +229,6 @@ public class stateInfo {
             city [i] = city [i+1];
         }
         numCities--;
-    }
-
-/*    public boolean modifyCity(String name, int pop, int index) {
-        try{
-            city[index] = new cityInfo(name, pop);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
-    } */
-
-    public void sortCities(int choice) {
-        System.out.print("Before sorting:");
-        toString();
-        if (choice == BY_NAME){
-            Arrays.sort(city, Comparator.comparing(city -> city.cityName));
-            System.out.print("After sorting:");
-            toString();
-        }
-        else if (choice == BY_POP) {
-            Arrays.sort(city, Comparator.comparing(city -> city.cityPop));
-            System.out.print("After sorting:");
-            toString();
-        }
-        else {
-                System.out.print("Invalid choice.");
-        }
     }
 
     public String toString() {
