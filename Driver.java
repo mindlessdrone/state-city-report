@@ -16,7 +16,7 @@ public class Driver {
         //local variables
         int choice;
         int numStates = 0;
-        stateInfo[] states = new stateInfo[1];
+        StateInfo[] states = new StateInfo[1];
 
         /********************************************/
         choice = menu();
@@ -108,7 +108,7 @@ public class Driver {
     *    Return numStates
     * END readFile
     **********************************************************/
-    public static int readFile(int numStates, stateInfo[] states) throws IOException 
+    public static int readFile(int numStates, StateInfo[] states) throws IOException 
     {
        // local constants
        final String QUIT = "-1";
@@ -172,7 +172,7 @@ public class Driver {
                        if (states[index] == null)
                        {
                           // create new state object at index
-                          states[index] = new stateInfo(name);
+                          states[index] = new StateInfo(name);
 
                           // increment numStates
                           numStates++;
@@ -242,14 +242,14 @@ public class Driver {
     } // end readFile method
 
 
-    public static void listStates(int numState, stateInfo states[]){
+    public static void listStates(int numState, StateInfo states[]){
         System.out.println("\t\t\tThe list of States:");
         for(int i = 0; i < numState; i++){
             System.out.println("\t\t\t" + (i+1) + ":\t" +  states[i].getName());
         }
     }
 
-    public static void modState(int numState, stateInfo states[]){
+    public static void modState(int numState, StateInfo states[]){
         final int QUIT = -1;
 
         int choice;
@@ -280,7 +280,7 @@ public class Driver {
         }
     }
 
-    public static void rmvState(int numState, stateInfo states[]){
+    public static void rmvState(int numState, StateInfo states[]){
         final int QUIT = -1;
 
         int choice;
@@ -308,7 +308,7 @@ public class Driver {
         }
     }
 
-    public static void rmvCity(int numState, stateInfo states[]){
+    public static void rmvCity(int numState, StateInfo states[]){
         final int QUIT = -1;
 
         int choice;
@@ -371,12 +371,12 @@ public class Driver {
     *    states[index] = key
     * END sortState
     **********************************************************/
-    public static void sortState(stateInfo states[], int pos, int numStates) 
+    public static void sortState(StateInfo states[], int pos, int numStates) 
     {
         // local constants
         
         // local variables 
-        stateInfo key = states[pos];    // state to be sorted
+        StateInfo key = states[pos];    // state to be sorted
         int index = pos;                // current index
 
         /**************************START sortState method************************/
@@ -408,7 +408,7 @@ public class Driver {
 
     } // end sortState
 
-    public static void proReport(int numState, stateInfo states[]) throws IOException {
+    public static void proReport(int numState, StateInfo states[]) throws IOException {
         final String QUIT = "-1";
 
         String fileName;
