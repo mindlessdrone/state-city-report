@@ -53,10 +53,10 @@ public class stateInfo {
    /**********************************************************
     * Method Name    : addCity
     * Author         : Anthony Massicci
-    * Date           : xxxxxxxxxxxxxxxx
+    * Date           : March 31, 2017
     * Course/Section : CSC264
-    * Program Description: xxxxxx
-    *
+    * Program Description: Add city to array, returns true if
+    * city was successfully added or modified, false if not.
     * 
     * BEGIN addCity(name, population)
     *    index = 0
@@ -75,9 +75,7 @@ public class stateInfo {
     *          cityAdded = true
     *       END IF
     *    ELSE
-    *       Update state population
-    *       Update city population
-    *       Call sortAddedCity(index)
+    *       cityAdded = modifyCity(index, name, population)
     *    END IF
     *    Return cityAdded
     * END addCity
@@ -143,11 +141,21 @@ public class stateInfo {
    /**********************************************************
     * Method Name    : modifyCity
     * Author         : Anthony Massicci
-    * Date           : xxxxxxxxxxxxxxxx
+    * Date           : March 31, 2017
     * Course/Section : CSC264
-    * Program Description: xxxxxx
+    * Program Description: Modifies city at specified index.
+    * Returns true if a city was sucessfully modified,
+    * otherwise false.
     *
-    * PSEUDOCODE - xxxxxxxxx
+    * BEGIN modifyCity(index, name, pop)
+    *    cityModified = false
+    *    IF (index is valid)
+    *       Update state population
+    *       Create new city object at index with name and pop
+    *       Call sortCity(index)
+    *       cityModified = true
+    *    END IF
+    * END modifyCity
     **********************************************************/
 
    public boolean modifyCity(int index, String cityName, int pop)
@@ -174,8 +182,10 @@ public class stateInfo {
 
          cityModified = true;
       } // end if 
-
+      
+      // return cityModified
       return cityModified;
+
    } //end modifyCity method
 
    /**********************************************************
@@ -210,7 +220,7 @@ public class stateInfo {
 
       } // end while
 
-      while (index < numCities && key.getPop() > city[index+1].getPop())
+      while (index < numCities - 1 && key.getPop() > city[index+1].getPop())
       {
          // move city to right to current index
          city[index] = city[index+1];
