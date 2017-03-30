@@ -1,7 +1,4 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
 
 /**
  * Created by Shelly on 2017/3/10.
@@ -19,7 +16,7 @@ public class Driver {
         //local variables
         int choice;
         int numStates = 0;
-        stateInfo[] states = new stateInfo[50];
+        stateInfo[] states = new stateInfo[1];
 
         /********************************************/
         choice = menu();
@@ -56,10 +53,193 @@ public class Driver {
         return choice;
     }
 
-    public static int readFile(int numStates, stateInfo[] states) throws IOException {
-        // TODO implement readFile
-        return 0;    
-    }
+   /**********************************************************
+    * Method Name    : sortState
+    * Author         : Anthony Massicci
+    * Date           : March 31, 2017
+    * Course/Section : CSC264
+    * Program Description: Reads states with associated cities
+    * from text file into an array, returns new number of states.
+    *
+    * BEGIN readFile(numStates, states)
+    *    index = -1
+    *    Ask user for file name
+    *    Input fileName
+    *    WHILE (fileName is not quit)
+    *       Open file for reading
+    *       IF (opening file was successful)
+    *          Read line from file
+    *          WHILE (there are lines to read)
+    *             Split line into tokens by delim
+    *             IF (line is state line)
+    *                name = first token
+    *                index = 0
+    *                WHILE (state with name is not found
+    *                       and end of array is not reached)
+    *                   Increment index
+    *                END WHILE
+    *                IF (index is valid)
+    *                   IF (states[index] is not initalized)
+    *                      Create state object at index
+    *                      Increment numStates
+    *                   END IF
+    *                ELSE
+    *                   Display error
+    *                   index = -1
+    *                END IF
+    *             ELSE IF (line is city line)
+    *                name = first token
+    *                population = second token
+    *                IF (population is valid)
+    *                   Add city to state at index
+    *                   Call sortState(states, index, numStates)
+    *                ELSE
+    *                   Display error
+    *                END IF
+    *             END IF
+    *             Read line from file
+    *          END WHILE
+    *       ELSE
+    *          Display error message
+    *       END IF
+    *       Ask user for file name
+    *       Input fileName
+    *    END WHILE
+    *    Return numStates
+    * END readFile
+    **********************************************************/
+    public static int readFile(int numStates, stateInfo[] states) throws IOException 
+    {
+       // local constants
+       final String QUIT = "-1";
+
+       // local variables
+       FileReader fr;      // FileReader object for current file
+       BufferedReader br;  // BufferedReader object for current file
+       String fileName;    // file name that user has entered
+       String line;        // current line read from file
+       String name;        // current nae
+       String[] tokens;    // tokens from current line
+       int index = -1;     // index used for linear search
+       int pop;            // population of current city
+       
+       /***********************Start readFile method*********************************/
+
+       // Ask user for file name
+       System.out.print("Please enter a file to read from (-1 to quit): ");
+       fileName = Keyboard.readString();
+
+       // while file name is not quit
+       while (!fileName.equals(QUIT))
+       {
+          // open file for reading
+          try 
+          {
+             fr = new FileReader(fileName);
+             br = new BufferedReader(fr);
+
+             // read line from file
+             line = br.readLine();
+
+             // while there are more lines to read
+             while (line != null)
+             {
+                // split line into tokens
+                tokens = line.split("\\t");
+
+                // if line is a state line
+                if (tokens.length == 1)
+                {
+                    // set name to first token
+                    name = tokens[0];
+
+                    // set index to beginning of array
+                    index = 0;
+
+                    // while state with name is not found
+                    while (index < numStates &&
+                           !states[index].getName().equals(name))
+                    {
+                        // increment index
+                        index++;
+                        
+                    } // end while
+
+                    // if states is not full
+                    if (index < states.length)
+                    {
+                       // if the state with read name was not found
+                       if (states[index] == null)
+                       {
+                          // create new state object at index
+                          states[index] = new stateInfo(name);
+
+                          // increment numStates
+                          numStates++;
+                       } 
+                    }
+                    else
+                    {
+                       // states is full display error
+                       System.err.printf("ERROR: State, %s was not " +
+                                         "added. State list is full\n",
+                                         name);
+                       // set index to error/blank state
+                       index = -1;
+                    } // end if
+                } 
+                else if (tokens.length == 2) // if line is a city line
+                {
+                    // set name to first token
+                    name = tokens[0];
+
+                    // set pop to second token
+                    try
+                    {
+                        pop = Integer.parseInt(tokens[1]);
+
+                        // if index is valid
+                        if (index >= 0)
+                        {
+                           // add city to current state
+                           states[index].addCity(name, pop);
+
+                           // restore order to array
+                           sortState(states, index, numStates);
+                        }
+                        else
+                        {
+                            // Display error
+                            System.err.printf("ERROR: City %s was not " +
+                                              "added. No state to add it to.\n",
+                                              name);
+                        }
+                    } catch (NumberFormatException ex)
+                    {
+                       // population token was not numeric, print error
+                       System.err.printf("ERROR: population value is not numeric on " +
+                                         "line:\t%s\n", line);
+                    } // end try-catch
+                } // end if
+                // read line from file
+                line = br.readLine();
+
+             } // end while
+          } 
+          catch(FileNotFoundException ex)
+          {
+             // the file could not be found, print error message
+             System.err.printf("ERROR: the file %s could not be found.\n", fileName);
+          }      
+
+          // Ask user for file name
+          System.out.print("Please enter a file to read from (-1 to quit): ");
+          fileName = Keyboard.readString();
+       } // end while
+     
+       // Return numStates  
+       return numStates;
+    } // end readFile method
 
 
     public static void listStates(int numState, stateInfo states[]){
@@ -170,7 +350,7 @@ public class Driver {
    /**********************************************************
     * Method Name    : sortState
     * Author         : Anthony Massicci
-    * Date           : xxxxxxxxxxxxxxxx
+    * Date           : March 31, 2017
     * Course/Section : CSC264
     * Program Description: Online insertion sort, places state
     * at specified position into the correct position in array.
@@ -213,7 +393,7 @@ public class Driver {
 
         // while index is not at right most position 
         // and key is greater than value on right
-        while (index < numStates && key.getPop() > states[index + 1].getPop())
+        while (index < numStates - 1 && key.getPop() > states[index + 1].getPop())
         {
             // move state on right to current position
             states[index] = states[index + 1];
