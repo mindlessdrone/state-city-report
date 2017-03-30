@@ -157,7 +157,6 @@ public class stateInfo {
     *    END IF
     * END modifyCity
     **********************************************************/
-
    public boolean modifyCity(int index, String cityName, int pop)
    {
       //local constants
@@ -191,21 +190,34 @@ public class stateInfo {
    /**********************************************************
     * Method Name    : sortCity
     * Author         : Anthony Massicci
-    * Date           : xxxxxxxxxxxxxxxx
+    * Date           : March 31, 2017
     * Course/Section : CSC264
     * Program Description: Online insertion sort, places city
     * at specified position into the correct position in array.
     *
-    * PSEUDOCODE - xxxxxxxxx
+    * BEGIN sortCity(pos)
+    *    key = city at pos
+    *    index = pos
+    *    WHILE (index is not at left most position and
+    *           and key is less than city on left)
+    *       Move city on left to current index
+    *       Decrement index
+    *    END WHILE
+    *    WHILE (index is not at right most position and
+    *           and key is greater than city on right)
+    *       Move city on right to current index
+    *       Increment index
+    *    END WHILE
+    *    city[index] = key
+    * END sortCity
     **********************************************************/
-
    private void sortCity(int pos)
    {
       //local constants
 
       //local variables
-      cityInfo key = city[pos];       // city to be sorted
-      int index = pos;           // current position
+      cityInfo key = city[pos];        // city to be sorted
+      int index = pos;                 // current position
 
       /********************   Start sortCity method  *****************/
       
@@ -231,7 +243,8 @@ public class stateInfo {
 
       // place key at current index
       city[index] = key;
-   } //end main method
+
+   } //end sortCity method
 
     public void removeCities(int index) {
         city [index] = null;
