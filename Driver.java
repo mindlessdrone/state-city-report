@@ -3,55 +3,154 @@ import java.io.*;
 /**
  * Created by Shelly on 2017/3/10.
  */
-public class Driver {
-   public static void main(String[] args) throws Exception {
+public class Driver 
+{
+   /**********************************************************
+    * Method Name    : main
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: The main method, call the methods to use.
+    *
+    * BEGIN main
+    *    call menu method and get returned choice
+    *    WHILE (choice is not quit)
+    *       IF (is to read file)
+    *          call read file method and get returned number of states
+    *       ELSE IF (is to modify states)
+    *          call modify states method
+    *       ELSE IF (is to modify city)
+    *          call modify city method
+    *       ELSE IF (is to remove states)
+    *          call remove states method
+    *       ELSE IF (is to remove city)
+    *          call remove city method
+    *       ELSE IF (is to sort states)
+    *          call sort states method
+    *       ELSE IF (is to sort city)
+    *          call sort cities method
+    *       ELSE IF (is to produce report)
+    *          call produce report method
+    *       ELSE
+    *          output invalid choice msg
+    *       END IF
+    *       call menu method and get returned choice
+    *    END WHILE
+    *    output closing program msg
+    * END main
+    **********************************************************/
+   public static void main(String[] args) throws Exception
+   {
       //local constants
-      final int QUIT = 0;
-      final int READ_FILE = 1;
-      final int MOD_STATE = 2;
-      final int REMOVE_STATE = 4;
-      final int REMOVE_CITY = 5;
-      final int PRODUCE_REPORT = 8;
+      final int QUIT           = 0;   //to quit the program
+      final int READ_FILE      = 1;   //to read an external text file
+      final int MOD_STATE      = 2;   //to modify state, change state name
+      final int REMOVE_STATE   = 4;   //to remove state from the array
+      final int REMOVE_CITY    = 5;   //to remove city from the array
+      final int PRODUCE_REPORT = 8;   //to write the information to a file
+      final int STATES_MAX     = 50;  //states' maximum of the state array
 
       //local variables
-      int choice;
-      int numStates = 0;
-      StateInfo[] states = new StateInfo[1];
+      int choice;                                         //menu choice of user
+      int numStates      = 0;                             //count how many states
+      StateInfo[] states = new StateInfo[STATES_MAX];     //array to hold 50 states
 
-      /********************************************/
+      /***************************************************************/
+
+      //call menu method and get returned choice
       choice = menu();
-      while (choice != QUIT) {
-         if (choice == READ_FILE) {
-            numStates = readFile(numStates, states);
-         } else if (choice == MOD_STATE) {
-            modState(numStates,states);
-         } else if (choice == REMOVE_STATE){
-            rmvState(numStates,states);
-         } else if (choice == REMOVE_CITY) {
-            rmvCity(numStates,states);
-         } else if (choice == PRODUCE_REPORT) {
-            proReport(numStates,states);
-         } else {
-            System.out.print("Your choice is invalid. Please enter again.");
-         }
-         choice = menu();
-      }
-      System.out.print("The program is closed. Have a nice day.");
-   }
 
-   public static int menu(){
-      int choice;
-      System.out.println("\t\t\tHello, menu is below, please input your choice:");
-      System.out.println("\t\t\t1. READ A FILE.");
-      System.out.println("\t\t\t2. MODIFY STATE INFORMATION.");
-      System.out.println("\t\t\t4. REMOVE STATE.");
-      System.out.println("\t\t\t5. REMOVE CITY.");
-      System.out.println("\t\t\t8. PRODUCE REPORTS.");
-      System.out.println("\t\t\t0. QUIT.");
+      //WHILE (choice is not quit)
+      while (choice != QUIT)
+      {
+         //IF (is to read file)
+         if (choice == READ_FILE)
+         {
+            //call read file method and get returned number of states
+            numStates = readFile(numStates,states);
+         }
+
+         //ELSE IF (is to modify states)
+         else if (choice == MOD_STATE)
+         {
+            //call modify states method
+            modState(numStates,states);
+         }
+
+         //ELSE IF (is to remove states)
+         else if (choice == REMOVE_STATE)
+         {
+            //call remove states method
+            numStates = rmvState(numStates,states);
+         }
+
+         //ELSE IF (is to remove city)
+         else if (choice == REMOVE_CITY)
+         {
+            //call remove city method
+            rmvCity(numStates,states);
+         }
+
+         //ELSE IF (is to produce report)
+         else if (choice == PRODUCE_REPORT)
+         {
+            //call produce report method
+            proReport(numStates,states);
+         }
+
+         //ELSE
+         else
+         {
+            //output invalid choice msg
+            System.out.println("\t\tYour choice is invalid. Please enter again.");
+         } //END IF
+
+         //call menu method and get returned choice
+         choice = menu();
+      } //END WHILE
+
+      //output closing program msg
+      System.out.println("\n\t\tThe program is closed. Have a nice day.");
+   } //END main
+
+   /**********************************************************
+    * Method Name    : menu
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To print menu and get choice from user.
+    *
+    * BEGIN menu
+    *    list of menu
+    *    get choice from user
+    *    return user choice
+    * END menu
+    **********************************************************/
+   public static int menu()
+
+   {
+      //local constants
+
+      //local variables
+      int choice;     //user's choice
+
+      /*****************************************************************************/
+
+      //list of menu
+      System.out.println("\n\n\t\tHello, menu is below, please input your choice:");
+      System.out.println("\t\t1. READ A FILE.");
+      System.out.println("\t\t2. MODIFY STATE INFORMATION.");
+      System.out.println("\t\t4. REMOVE STATE.");
+      System.out.println("\t\t5. REMOVE CITY.");
+      System.out.println("\t\t8. PRODUCE REPORTS.");
+      System.out.print("\t\t0. QUIT.\n\t\t");
+
+      //get choice from user
       choice = Keyboard.readInt();
 
+      //return user choice
       return choice;
-   }
+   } //END menu
 
    /**********************************************************
     * Method Name    : sortState
@@ -242,110 +341,371 @@ public class Driver {
       return numStates;
    } // end readFile method
 
+    /**********************************************************
+     * Method Name    : listStates
+     * Author         : Shao yu Cheng
+     * Date           : Mar 31 , 2017
+     * Course/Section : CSC 264 - 001
+     * Program Description: To print the list of States.
+     *
+     * BEGIN listStates
+     *    print states list msg
+     *    FOR ()
+     *       get state's name, population and print
+     *    END FOR
+     * END listStates
+     **********************************************************/
+    public static void listStates(int numState, StateInfo states[])
+    {
+        //local constants
 
-   public static void listStates(int numState, StateInfo states[]){
-      System.out.println("\t\t\tThe list of States:");
-      for(int i = 0; i < numState; i++){
-         System.out.println("\t\t\t" + (i+1) + ":\t" +  states[i].getName());
-      }
-   }
+        //local variables
 
-   public static void modState(int numState, StateInfo states[]){
-      final int QUIT = -1;
+        /***************************************************/
 
-      int choice;
-      String newName;
-      if (numState > 0 ) {
-         listStates(numState, states);
-         System.out.print("Enter the choice of the State you want to modify (or -1 to QUIT):");
-         choice = Keyboard.readInt();
-         while (choice != QUIT) {
-            if (0 < choice && choice <= numState) {
-               System.out.print("Enter the name will be changed to:");
-               newName = Keyboard.readString();
-               if (newName != null) {
-                  states[choice - 1].setName(newName);
-                  System.out.print("Changing name is success.");
-               } else {
-                  System.out.print("The name is invalid.");
-               }
-            } else {
-               System.out.print("The choice is invalid.");
-            }
+        //print states list msg
+        System.out.println("\n\n\t\tThe list of States: ");
+
+        //FOR ()
+        for (int i = 0; i < numState; i++)
+        {
+            //get state's name, population and print
+            System.out.println("\t\t" + (i+1) + ". " + states[i].getName() + ", " + states[i].getPop());
+        } //END FOR
+
+        //print new line
+        System.out.println("\n");
+    } //END listStates
+
+    /**********************************************************
+     * Method Name    : modState
+     * Author         : Shao yu Cheng
+     * Date           : Mar 31 , 2017
+     * Course/Section : CSC 264 - 001
+     * Program Description: To modify the states' name.
+     *
+     * BEGIN modState
+     *    IF (number of states is greater than zero)
+     *       call listStates method
+     *       get choice from user
+     *       WHILE (choice is not quit)
+     *          IF (choice is between the number of states)
+     *             get state's new name
+     *             IF (new name is not null)
+     *                set state's name to new name and print success msg
+     *             ELSE
+     *                print error msg
+     *             END IF
+     *          ELSE
+     *             print error msg
+     *          END IF
+     *       call listStates method
+     *       get choice from user
+     *       END WHILE
+     *    ELSE
+     *       print error msg
+     *    END IF
+     * END modState
+     **********************************************************/
+    public static void modState(int numState, StateInfo states[])
+    {
+        //local constants
+        final int QUIT = -1;    //quit value
+
+        //local variables
+        int choice;             //choice form user
+        String newName;         //state's new name
+
+        /*******************************************************/
+
+        //IF (number of states is greater than zero)
+        if (numState > 0)
+        {
+            //call listStates method
             listStates(numState, states);
-            System.out.print("Enter the choice of the State you want to modify (or -1 to QUIT):");
+
+            //get choice from user
+            System.out.print("\t\tEnter the choice of the State you want to modify (or -1 to QUIT): ");
             choice = Keyboard.readInt();
-         }
-      } else {
-         System.out.println ("There's no States in the file.");
-      }
-   }
 
-   public static void rmvState(int numState, StateInfo states[]){
-      final int QUIT = -1;
+            //WHILE (choice is not quit)
+            while (choice != QUIT)
+            {
+                //IF (choice is between the number of states)
+                if (0 < choice && choice <= numState)
+                {
+                    //get state's new name
+                    System.out.print("\t\tEnter the name will be changed to: ");
+                    newName = Keyboard.readString();
 
-      int choice;
-      if (numState > 0 ) {
-         listStates(numState, states);
-         System.out.print("Enter the choice of the State you want to remove(or -1 to QUIT):");
-         choice = Keyboard.readInt();
-         while (choice != QUIT) {
-            if (choice < numState && choice > 0) {
-               states[choice - 1] = null;
-               for (int i = choice; i < numState; i++) {
-                  states[i - 1] = states[i];
-               }
-               numState--;
-               System.out.print("The State is removed.");
-            } else {
-               System.out.print("The choice is invalid.");
-            }
+                    //IF (new name is not null)
+                    if (newName != null)
+                    {
+                        //set state's name to new name and print success msg
+                        states[choice - 1].setName(newName);
+                        System.out.println("\t\tChanging name is success.\n");
+                    }
+
+                    //ELSE
+                    else
+                    {
+                        //print error msg
+                        System.out.println("\t\tThe name is invalid.");
+                    } //END IF
+                }
+
+                //ELSE
+                else
+                {
+                    //print error msg
+                    System.out.println("\t\tThe choice is invalid.");
+                } //END IF
+
+                //call listStates method
+                listStates(numState, states);
+
+                //get choice from user
+                System.out.print("\t\tEnter the choice of the State you want to modify (or -1 to QUIT): ");
+                choice = Keyboard.readInt();
+            } //END WHILE
+
+        }
+
+        //ELSE
+        else
+        {
+            //print error msg
+            System.out.println ("\t\tThere's no States in the file.");
+        } //END IF
+
+    } //END modState
+
+    /**********************************************************
+     * Method Name    : rmvState
+     * Author         : Shao yu Cheng
+     * Date           : Mar 31 , 2017
+     * Course/Section : CSC 264 - 001
+     * Program Description: To remove the state from the list.
+     *
+     * BEGIN rmvState
+     *    IF (number of states is greater than zero)
+     *       call listStates method
+     *       get state choice of user
+     *       WHILE (choice is not quit)
+     *          IF (choice is valid)
+     *             remove state
+     *             FOR ()
+     *                move the states forward
+     *             END FOR
+     *             number of states reduce 1
+     *             print success msg
+     *          ELSE
+     *             print error msg
+     *          END IF
+     *          call listStates method
+     *          get state choice of user
+     *       END WHILE
+     *    ELSE
+     *       print error msg
+     *    END IF
+     *    return the new number of states
+     * END rmvState
+     **********************************************************/
+    public static int rmvState(int numState, StateInfo states[])
+    {
+        //local constants
+        final int QUIT = -1;    //quit value
+
+        //local variables
+        int choice;             //state choice of user
+
+        /********************************************************************************/
+
+        //IF (number of states is greater than zero)
+        if (numState > 0)
+        {
+            //call listStates method
             listStates(numState, states);
-            System.out.print("Enter the choice of the State you want to remove(or -1 to QUIT):");
+
+            //get state choice of user
+            System.out.print("\t\tEnter the choice of the State you want to remove(or -1 to QUIT): ");
             choice = Keyboard.readInt();
-         }
-      } else {
-         System.out.println("There's no States in the file.");
-      }
-   }
 
-   public static void rmvCity(int numState, StateInfo states[]){
-      final int QUIT = -1;
+            //WHILE (choice is not quit)
+            while (choice != QUIT)
+            {
+                //IF (choice is valid)
+                if (choice <= numState && choice > 0)
+                {
+                    //remove state
+                    states[choice - 1] = null;
 
-      int choice;
-      int cityChoice;
+                    //FOR ()
+                    for (int i = choice; i < numState; i++)
+                    {
+                        //move the states forward
+                        states[i - 1] = states[i];
+                    } //END FOR
 
-      if (numState > 0 ) {
-         listStates(numState, states);
-         System.out.print("Enter the choice of the State where the city at that you want to remove(or -1 to QUIT):");
-         choice = Keyboard.readInt();
-         while (choice != QUIT) {
-            if (choice < numState && choice > 0) {
-               states[choice - 1].toString();
-               System.out.print("Enter the choice of the City you want to remove (or -1 to QUIT):");
-               cityChoice = Keyboard.readInt();
-               while (cityChoice != QUIT) {
-                  if (cityChoice < states[choice - 1].getNumCities() && 0 < cityChoice) {
-                     states[choice - 1].removeCities(cityChoice);
-                     System.out.print("City is removed.");
-                  } else {
-                     System.out.print("The choice is invalid.");
-                  }
-                  states[choice - 1].toString();
-                  System.out.print("Enter the choice of the City you want to remove (or -1 to QUIT):");
-                  cityChoice = Keyboard.readInt();
-               }
-            } else {
-               System.out.print("The choice is invalid.");
-            }
+                    //number of states reduce 1
+                    numState--;
+
+                    //print success msg
+                    System.out.println("\t\tThe State is removed.");
+                }
+
+                //ELSE
+                else
+                {
+                    //print error msg
+                    System.out.println("\t\tThe choice is invalid.");
+                } //END IF
+
+                //call listStates method
+                listStates(numState, states);
+
+                //get state choice of user
+                System.out.print("\t\tEnter the choice of the State you want to remove(or -1 to QUIT): ");
+                choice = Keyboard.readInt();
+            } //END WHILE
+        }
+
+        //ELSE
+        else
+        {
+            //print error msg
+            System.out.println("\t\tThere's no States in the file.");
+        } //END IF
+
+        //return the new number of states
+        return numState;
+    } //END rvmState
+
+    /**********************************************************
+     * Method Name    : rmvCity
+     * Author         : Shao yu Cheng
+     * Date           : Mar 31 , 2017
+     * Course/Section : CSC 264 - 001
+     * Program Description: To remove city from the list.
+     *
+     * BEGIN rmvCity
+     *    IF (number of states is greater than zero)
+     *       call listStates method
+     *       get state choice of user
+     *       WHILE (choice is not quit)
+     *          IF (choice is valid)
+     *             print list of cities
+     *             get city choice
+     *             WHILE (city choice is not quit)
+     *                IF (city choice is valid)
+     *                   remove city from the list
+     *                   print success msg
+     *                ELSE
+     *                   print error msg
+     *                END IF
+     *                print list of cities
+     *                get city choice
+     *             END WHILE
+     *          ELSE
+     *             print error msg
+     *          END IF
+     *          call listStates method
+     *          get state choice of user
+     *       END WHILE
+     *    ELSE
+     *       print error msg
+     *    END IF
+     * END rmvCity
+     **********************************************************/
+    public static void rmvCity(int numState, StateInfo states[])
+    {
+        //local constants
+        final int QUIT = -1;    //quit value
+
+        //local variables
+        int choice;             //choice of state
+        int cityChoice;         //choice of city
+
+        /***********************************************************************/
+
+        //IF (number of states is greater than zero)
+        if (numState > 0)
+        {
+            //call listStates method
             listStates(numState, states);
-            System.out.print("Enter the choice of the State where the city at that you want to remove(or -1 to QUIT):");
+
+            //get state choice of user
+            System.out.print("\t\tEnter the choice of the State where the city at " +
+                    "that you want to remove(or -1 to QUIT): ");
             choice = Keyboard.readInt();
-         }
-      } else {
-         System.out.println("There's no States in the file.");
-      }
-   }
+
+            //WHILE (choice is not quit)
+            while (choice != QUIT)
+            {
+                //IF (choice is valid)
+                if (choice <= numState && choice > 0)
+                {
+                    //print list of cities
+                    System.out.print(states[choice - 1].toString());
+
+                    //get city choice
+                    System.out.print("\t\tEnter the choice of the City you want to remove (or -1 to QUIT): ");
+                    cityChoice = Keyboard.readInt();
+
+                    //WHILE (city choice is not quit)
+                    while (cityChoice != QUIT)
+                    {
+                        //IF (city choice is valid)
+                        if (cityChoice <= states[choice - 1].getNumCities() && 0 < cityChoice)
+                        {
+                            //remove city from the list
+                            states[choice - 1].removeCities(cityChoice);
+
+                            //print success msg
+                            System.out.println("\t\tCity is removed.");
+                        }
+
+                        //ELSE
+                        else
+                        {
+                            //print error msg
+                            System.out.println("\t\tThe choice is invalid.");
+                        } //END IF
+
+                        //print list of cities
+                        System.out.print(states[choice - 1].toString());
+
+                        //get city choice
+                        System.out.print("\t\tEnter the choice of the City you want to remove (or -1 to QUIT): ");
+                        cityChoice = Keyboard.readInt();
+                    } //END WHILE
+
+                }
+
+                //ELSE
+                else
+                {
+                    //print error msg
+                    System.out.println("\t\tThe choice is invalid.");
+                } //END IF
+
+                //call listStates method
+                listStates(numState, states);
+
+                //get state choice
+                System.out.print("\t\tEnter the choice of the State where the city at that you want to remove(or -1 to QUIT): ");
+                choice = Keyboard.readInt();
+            } //END WHILE
+
+        }
+
+        //ELSE
+        else
+        {
+            //print error msg
+            System.out.println("\t\tThere's no States in the file.");
+        } //END IF
+    } //END rmvCity
 
 
    /**********************************************************
@@ -409,25 +769,75 @@ public class Driver {
 
    } // end sortState
 
-   public static void proReport(int numState, StateInfo states[]) throws IOException {
-      final String QUIT = "-1";
+   /**********************************************************
+    * Method Name    : proReport
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To produce the final report.
+    *
+    * BEGIN proReport
+    *    IF (number of states is greater than zero)
+    *       ask for file's name
+    *       call new buffered writer
+    *       IF (file name is not quit)
+    *          FOR ()
+    *             write states and cities' name and population into file
+    *          END FOR
+    *          close the buffered writer
+    *          print success msg
+    *       END IF
+    *    ELSE
+    *       print error msg
+    *    END IF
+    * END proReport
+    **********************************************************/
+   public static void proReport(int numState, StateInfo states[]) throws IOException
+   {
+      //local constants
+      final String QUIT = "-1";   //quit value
 
-      String fileName;
-      BufferedWriter bw;
-      if (numState > 0 ) {
+      //local variables
+      String fileName;            //report file's name
+      BufferedWriter bw;          //buffered writer to write the text to file
 
-         System.out.print("Enter the file's name (or -1 to quit): ");
+      /*******************************************************************/
+
+      //IF (number of states is greater than zero)
+      if (numState > 0)
+      {
+         //ask for file's name
+         System.out.print("\t\tEnter the file's name (or -1 to quit): ");
          fileName = Keyboard.readString();
+
+         //call new buffered writer
          bw = new BufferedWriter(new FileWriter(fileName));
-         if (fileName != QUIT) {
-            for (int i = 0; i <= numState; i++) {
-               bw.write(states[i].getName() + "   " + states[i].getPop());
+
+         //IF (file name is not quit)
+         if (fileName != QUIT)
+         {
+            //FOR ()
+            for (int i = 0; i < numState; i++)
+            {
+               //write states and cities' name and population into file
+               bw.write("\r\n\t\t" + states[i].getName() + "\t\t" + states[i].getPop() + "\r\n");
                bw.write(states[i].toString());
-            }
-            System.out.print("The final report file is produced.");
-         }
-      } else {
-         System.out.println("There's no States in the file.");
+            } //END FOR
+
+            //close the buffered writer
+            bw.close();
+
+            //print success msg
+            System.out.println("\t\tThe final report file is produced.");
+         } //END IF
       }
-   }
+
+      //ELSE
+      else
+      {
+         //print error msg
+         System.out.println("\t\tThere's no States in the file.");
+      } //END IF
+
+   } //END proReport
 }
