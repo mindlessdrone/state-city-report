@@ -1,54 +1,45 @@
 /**
  * Created by Shelly on 2017/3/10.
  */
-import java.util.Arrays;
-import java.util.Comparator;
 
-public class stateInfo {
+public class StateInfo {
 
-    //local constants
-    final static int CITIES_MAX = 30;
-    final static int BY_NAME = 1;
-    final static int BY_POP =2;
+   //local constants
+   final static int CITIES_MAX = 30;
 
-    //local variables
-    String stateName;
-    int statePop = 0;
-    private int numCities = 0;
-    private int stateCount = 0;
-    private cityInfo city[];
+   //local variables
+   String stateName;
+   int statePop = 0;
+   private int numCities = 0;
+   private int stateCount = 0;
+   private cityInfo city[];
 
 
-    public stateInfo(String name) {
-        stateName = name;
-        city = new cityInfo[CITIES_MAX];
-    }
+   public StateInfo(String name) {
+      stateName = name;
+      city = new cityInfo[CITIES_MAX];
+   }
 
-    public stateInfo(String stateName, int statePop) {
-        this.stateName = stateName;
-        this.statePop = statePop;
-    }
+   public void setName(String stateName) {
+      this.stateName = stateName;
+      stateCount++;
+   }
 
-    public void setName(String stateName) {
-        this.stateName = stateName;
-        stateCount++;
-    }
+   public String getName() {
+      return stateName;
+   }
 
-    public String getName() {
-        return stateName;
-    }
+   public cityInfo getCity(int choice) {
+      return city[choice-1];
+   }
 
-    public cityInfo getCity(int choice) {
-        return city[choice-1];
-    }
+   public int getNumCities() {
+      return numCities;
+   }
 
-    public int getNumCities() {
-        return numCities;
-    }
-
-    public int getPop() {
-        return statePop;
-    }
+   public int getPop() {
+      return statePop;
+   }
 
    /**********************************************************
     * Method Name    : addCity
@@ -90,7 +81,7 @@ public class stateInfo {
       boolean cityAdded = false; // flag to return whether city has been added
 
       /********************   Start addCity method  *****************/
-      
+
       // perform linear search to find if city is already in array
       while (index < numCities && !name.equals(city[index].getName()))
       {
@@ -102,34 +93,34 @@ public class stateInfo {
       // if city was not found lets try to add it
       if (city[index] == null)
       {
-          // only add the city if array is not full
-          if (numCities < CITIES_MAX)
-          {
-              // create a new city object
-              city[index] = new cityInfo(name, population);
+         // only add the city if array is not full
+         if (numCities < CITIES_MAX)
+         {
+            // create a new city object
+            city[index] = new cityInfo(name, population);
 
-              // increment numCities
-              numCities++;
+            // increment numCities
+            numCities++;
 
-              // check to see if array needs sorting
-              if (numCities > 1)
-              {
-                  // sort the city into the array
-                  sortCity(index);
-              }
+            // check to see if array needs sorting
+            if (numCities > 1)
+            {
+               // sort the city into the array
+               sortCity(index);
+            }
 
-              // update state population
-              statePop += population;
+            // update state population
+            statePop += population;
 
-              // set added city flag to true
-              cityAdded = true;
+            // set added city flag to true
+            cityAdded = true;
 
-          } // end if
+         } // end if
       }
       else // a city was found
       {
-          // modify city at index
-          modifyCity(index, name, population);
+         // modify city at index
+         modifyCity(index, name, population);
 
       } // end if
 
@@ -137,7 +128,7 @@ public class stateInfo {
       return cityAdded;
 
    } //end addCity method
-   
+
    /**********************************************************
     * Method Name    : modifyCity
     * Author         : Anthony Massicci
@@ -162,10 +153,10 @@ public class stateInfo {
       //local constants
 
       //local variables
-      boolean cityModified = false;
+      boolean cityModified = false; // flag to tell if a city was successfully modified
 
       /********************   Start modifyCity method  *****************/
-      
+
       // if index is valid modify selected city
       if (index < numCities)
       {
@@ -181,7 +172,7 @@ public class stateInfo {
 
          cityModified = true;
       } // end if 
-      
+
       // return cityModified
       return cityModified;
 
@@ -220,7 +211,7 @@ public class stateInfo {
       int index = pos;                 // current position
 
       /********************   Start sortCity method  *****************/
-      
+
       // while key is not sorted or we have not reached the end of array
       while (index > 0 && key.getPop() < city[index-1].getPop())
       {
@@ -246,19 +237,50 @@ public class stateInfo {
 
    } //end sortCity method
 
-    public void removeCities(int index) {
-        city [index] = null;
-        for (int i = index; i < numCities; i++){
-            city [i] = city [i+1];
-        }
-        numCities--;
-    }
+   public void removeCities(int index) {
+      city [index] = null;
+      for (int i = index; i < numCities; i++){
+         city [i] = city [i+1];
+      }
+      numCities--;
+   }
 
-    public String toString() {
-        String str = "";
-        for(int i = 0; i < numCities; i++) {
-            str += city[i].toString() + "\n";
-        }
-        return str;
-    }
-}
+   /**********************************************************
+    * Method Name    : toString
+    * Author         : Anthony Massicci
+    * Date           : March 31, 2017
+    * Course/Section : CSC264
+    * Program Description: Returns string representation of
+    * class. Returns state name along with each city name
+    * and population. 
+    *
+    * BEGIN toString
+    *    Append state name to str
+    *    FOR (each city)
+    *       Append city name and population to str
+    *    END FOR
+    *    Return str
+    * END toString
+    **********************************************************/
+   public String toString() 
+   {
+      // local constants
+      // local variables
+      String str;    // built string to be returned
+      /****************Start toString method****************/ 
+      
+      // append state name to str
+      str = getName() + "\n";
+      
+      // for each city 
+      for(int i = 0; i < numCities; i++) 
+      {
+         // append city name and population to str
+         str += city[i] + "\n";
+
+      } // end for
+
+      // return str
+      return str;
+   } // end toString
+} // end StateInfo
