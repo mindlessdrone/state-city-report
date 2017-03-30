@@ -1,9 +1,25 @@
-/**
- * Created by Shelly on 2017/3/10.
- */
 
-public class StateInfo {
-
+/**********************************************************
+ * Class Name     : StateInfo
+ * Author         : Shao yu Cheng, Anthony Massacci
+ * Date           : Mar 31 , 2017
+ * Course/Section : CSC 264 - 001
+ * Program Description: The class will store the state's information.
+ *
+ * Methods: + stateInfo(String stateName) 	                : none
+ *			+ setName(String stateName)                : void
+ *			+ getName()                     	        : String
+ *			+ getNumCities()                                : int
+ *			+ getPop()			                        : int
+ *		    + addCities(String name,int pop)		        : void
+ *		    + removeCities(int index)                       : void
+ *		    + modifyCity(String name, int pop, int index)   : boolean
+ *		    + sortCities(int choice)                        : void
+ *		    + toString()                                    : String
+ *
+ **********************************************************/
+public class StateInfo 
+{
    //local constants
    final static int CITIES_MAX = 30;
 
@@ -20,26 +36,79 @@ public class StateInfo {
       city = new cityInfo[CITIES_MAX];
    }
 
-   public void setName(String stateName) {
-      this.stateName = stateName;
-      stateCount++;
-   }
+   /**********************************************************
+    * Method Name    : setName
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To reset the state's name.
+    *
+    * BEGIN setCityName
+    *    local state name = new state name
+    * END setCityName
+    **********************************************************/
+   public void setName(String stateName)
+   {
+      this.stateName = stateName;  //local state name = new state name
+   } //END setCityName
 
-   public String getName() {
-      return stateName;
-   }
+   /**********************************************************
+    * Method Name    : getName
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To return the state's name.
+    *
+    * BEGIN getName
+    *    return the state's name
+    * END getName
+    **********************************************************/
+   public String getName()
+   {
+      return stateName;  //return the state's name
+   } //END getName
 
-   public cityInfo getCity(int choice) {
-      return city[choice-1];
-   }
+   /**********************************************************
+    * Method Name    : getNumCities
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To return how many cities in the state.
+    *
+    * BEGIN getNumCities
+    *    return how many cities in the state
+    * END getNumCities
+    **********************************************************/
+   public int getNumCities()
+   {
+      return numCities; //return how many cities in the state
+   } //END getNumCities
 
-   public int getNumCities() {
-      return numCities;
-   }
+   /**********************************************************
+    * Method Name    : getPop
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To return the state's total population.
+    *
+    * BEGIN getPop
+    *    FOR()
+    *       add city's population to total state population
+    *    EDN FOR
+    *    return state's total population
+    * END getPop
+    **********************************************************/
+   public int getPop()
+   {
+      //FOR()
+      for (int i = 0; i < numCities; i++)
+      {
+         //add city's population to total state population
+         statePop = city [i].getPop() + statePop;
+      } //EDN FOR
 
-   public int getPop() {
-      return statePop;
-   }
+      return statePop;  //return state's total population
+   } //END getPop
 
    /**********************************************************
     * Method Name    : addCity
@@ -237,13 +306,37 @@ public class StateInfo {
 
    } //end sortCity method
 
-   public void removeCities(int index) {
+   /**********************************************************
+    * Method Name    : removeCities
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: To remove the city from array.
+    *
+    * BEGIN removeCities
+    *    decrease state population by city population
+    *    remove city from array
+    *    FOR()
+    *       move cities forward
+    *    END FOR
+    *    reduce 1 from number of cities
+    * END removeCities
+    **********************************************************/
+   public void removeCities(int index)
+   {
+      // decrease state population by city population
+      statePop -= city[index].getPop();
+
+      //remove city from array
       city [index] = null;
-      for (int i = index; i < numCities; i++){
+
+      //FOR()
+      for (int i = index; i < numCities; i++)
+      {
+         //move cities forward
          city [i] = city [i+1];
-      }
-      numCities--;
-   }
+      } //END FOR
+   } // end removeCities
 
    /**********************************************************
     * Method Name    : toString
@@ -268,10 +361,10 @@ public class StateInfo {
       // local variables
       String str;    // built string to be returned
       /****************Start toString method****************/ 
-      
+
       // append state name to str
       str = getName() + "\n";
-      
+
       // for each city 
       for(int i = 0; i < numCities; i++) 
       {
