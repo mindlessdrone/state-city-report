@@ -164,10 +164,10 @@ public class Driver
       System.out.println("\t\t3 : Remove State");
       System.out.println("\t\t4 : Remove City");
       System.out.println("\t\t5 : Produce Report");
-      System.out.print("\t\t0 : Quit\n\t\t");
+      System.out.print("\t\t0 : Quit\n");
 
       //get choice from user
-      System.out.println("\n\t\tEnter Selection : ");
+      System.out.print("\n\t\tEnter Selection: ");
       choice = Keyboard.readInt();
 
       //return user choice
