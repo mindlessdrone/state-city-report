@@ -843,6 +843,7 @@ public class Driver
    {
       //local constants
       final String QUIT = "-1";   //quit value
+      final int FIELD 	= 30;	  //field width
 
       //local variables
       String 	fileName,         //report file's name
@@ -875,8 +876,8 @@ public class Driver
 
                //write states and cities' name and population into file
                System.out.println("\t\t" + stateName +
-               					  Util.setRight((30 - stateName.length()), 
-								"" + states[i].getPop()));
+               			  Util.setRight((FIELD - stateName.length()), 
+				  "" + states[i].getPop()));
                bw.write(states[i].toString());
             } //END FOR
 
