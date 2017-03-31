@@ -2,7 +2,7 @@ import java.io.*;
 
 /**********************************************************
  * Program Name   : States-citiesIO
- * Author         : Shao yu Cheng, Anthony Massacci
+ * Author         : Shao yu Cheng, Anthony Massacci, Alexander Kim
  * Date           : Mar 31 , 2017
 A * Course/Section : CSC 264 - 001
  * Program Description: The program will ask user to insert
@@ -13,12 +13,12 @@ A * Course/Section : CSC 264 - 001
  *
  *
  * Methods: 
- *       + menu() 								                         : int
-  *       + readFile(int numStates, stateInfo states[])             : int
- *			+ listStates(int numState, stateInfo states[])	          : void
- *			+ modState(int numState, stateInfo states[])	             : void
- *			+ modCity(int numState, stateInfo states[])               : void
- *			+ rmvState(int numState, stateInfo states[])	             : int
+ *       + menu() 							     : int
+  *       + readFile(int numStates, stateInfo states[])             	     : int
+ *			+ listStates(int numState, stateInfo states[])	     : void
+ *			+ modState(int numState, stateInfo states[])	     : void
+ *			+ modCity(int numState, stateInfo states[])          : void
+ *			+ rmvState(int numState, stateInfo states[])	     : int
  *		   + rmvCity(int numState, stateInfo states[])               : void
  *		   + sortState(stateInfo states[], int pos, int numStates)   : void
  *		   + proReport(int numState, stateInfo states[])             : void
@@ -875,7 +875,8 @@ public class Driver
 
                //write states and cities' name and population into file
                System.out.println("\t\t" + stateName +
-               					  Util.setRight((30 - stateName.length()), "" + states[i].getPop()));
+               					  Util.setRight((30 - stateName.length()), 
+								"" + states[i].getPop()));
                bw.write(states[i].toString());
             } //END FOR
 
@@ -898,4 +899,5 @@ public class Driver
       } //END IF
 
    } //END proReport
-}
+	
+}//END states-citiesIO
