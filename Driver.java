@@ -269,7 +269,7 @@ public class Driver
                tokens = line.split("\\t");
 
                // if line is a state line
-n               if (tokens.length == 1)
+               if (tokens.length == 1)
                {
                   // set name to first token
                   name = tokens[0];
