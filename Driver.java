@@ -338,7 +338,8 @@ public class Driver
                      }
                   } catch (NumberFormatException ex)
                   {
-                     // population token was not numeric, print error                     System.err.printf("\n\t\t<ERROR: Population Value is Non-Numeric on " +
+                     // population token was not numeric, print error                     
+                     System.err.printf("\n\t\t<ERROR: Population Value is Non-Numeric on " +
                            "Line:\t%s>\n", line);
                   } // end try-catch
                } // end if
@@ -348,7 +349,7 @@ public class Driver
             } // end while
          } 
          catch(FileNotFoundException ex)
-n         {
+         {
             // the file could not be found, print error message
             System.err.printf("\n\t\t<ERROR: File %s Not Found.>\n", fileName);
          }      
@@ -358,7 +359,7 @@ n         {
          fileName = Keyboard.readString();
       } // end while
 
-\      // Return numStates  
+      // Return numStates  
       return numStates;
    } // end readFile method
 
