@@ -6,35 +6,56 @@
  * Course/Section : CSC 264 - 001
  * Program Description: The class will store the state's information.
  *
- * Methods: + stateInfo(String stateName) 	                : none
- *			+ setName(String stateName)                : void
- *			+ getName()                     	        : String
+ * Methods: 
+ *       + StateInfo(String name) 	                     : none
+ *			+ setName(String name)                          : void
+ *			+ getName()                     	               : String
  *			+ getNumCities()                                : int
- *			+ getPop()			                        : int
- *		    + addCities(String name,int pop)		        : void
- *		    + removeCities(int index)                       : void
- *		    + modifyCity(String name, int pop, int index)   : boolean
- *		    + sortCities(int choice)                        : void
- *		    + toString()                                    : String
- *
+ *			+ getPop()			                              : int
+ *		   + addCity(String name,int pop)		            : void
+ *		   + removeCity(int index)                         : void
+ *		   + modifyCity(String name, int pop, int index)   : boolean
+ *		   - sortCity(int pos)                             : void
+ *		   + toString()                                    : String
+ * Fields:
+ *       + CITIES_MAX                                    : static int
+ *       - stateName                                     : String
+ *       - statePop                                      : int
+ *       - numCities                                     : int
+ *       - city                                          : CityInfo[]
  **********************************************************/
 public class StateInfo 
 {
-   //local constants
+   //class constants
    final static int CITIES_MAX = 30;
 
-   //local variables
-   String stateName;
-   int statePop = 0;
-   private int numCities = 0;
-   private int stateCount = 0;
-   private cityInfo city[];
+   //class fields
+   private String stateName;
+   private int statePop;
+   private int numCities;
+   private CityInfo city[];
 
 
-   public StateInfo(String name) {
-      stateName = name;
-      city = new cityInfo[CITIES_MAX];
-   }
+   /**********************************************************
+    * Method Name    : stateInfo
+    * Author         : Shao yu Cheng
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: The constructor of stateInfo which
+    *    will get and store the state's name.
+    *
+    * BEGIN stateInfo
+    *    the local stateName = the stateName gets from file
+    *    set number of cities to 0
+    * END stateInfo
+    **********************************************************/
+   public StateInfo(String name)
+   {
+      stateName = name;  //the local stateName = the stateName gets from file
+      numCities = 0;     //set number of cities to 0
+      statePop = 0;      //set total population to zero 
+      city = new CityInfo[CITIES_MAX]; //initalize city array
+   } //END stateInfo
 
    /**********************************************************
     * Method Name    : setName
@@ -92,23 +113,50 @@ public class StateInfo
     * Program Description: To return the state's total population.
     *
     * BEGIN getPop
-    *    FOR()
-    *       add city's population to total state population
-    *    EDN FOR
     *    return state's total population
     * END getPop
     **********************************************************/
    public int getPop()
    {
-      //FOR()
-      for (int i = 0; i < numCities; i++)
-      {
-         //add city's population to total state population
-         statePop = city [i].getPop() + statePop;
-      } //EDN FOR
+      // return state's total population
+      return statePop;
 
-      return statePop;  //return state's total population
    } //END getPop
+
+   /**********************************************************
+    * Method Name    : getCity
+    * Author         : Anthony Massicci
+    * Date           : Mar 31 , 2017
+    * Course/Section : CSC 264 - 001
+    * Program Description: Returns city object at specified index
+    * if index is valid, null if otherwise
+    *
+    * BEGIN getCity(index)
+    *    retCity = null
+    *    IF (index is valid)
+    *       retCity = city at index
+    *    END IF
+    *    Return retCity
+    * END getCity
+    **********************************************************/
+   public CityInfo getCity(int index)
+   {
+      //local constants
+      // local variables
+      CityInfo retCity = null;      // city to be returned
+
+      /**************************start getCity method*********/
+
+      // if (index is valid)
+      if (index < numCities)
+      {
+         // set retCity to city at index
+         retCity = city[index];
+      } //end if
+
+      // return retCity
+      return retCity;
+   } //END getCity
 
    /**********************************************************
     * Method Name    : addCity
@@ -166,7 +214,7 @@ public class StateInfo
          if (numCities < CITIES_MAX)
          {
             // create a new city object
-            city[index] = new cityInfo(name, population);
+            city[index] = new CityInfo(name, population);
 
             // increment numCities
             numCities++;
@@ -234,7 +282,7 @@ public class StateInfo
          statePop += pop;
 
          // create city object with new information
-         city[index] = new cityInfo(cityName, pop);
+         city[index] = new CityInfo(cityName, pop);
 
          // restore order of array
          sortCity(index);
@@ -276,7 +324,7 @@ public class StateInfo
       //local constants
 
       //local variables
-      cityInfo key = city[pos];        // city to be sorted
+      CityInfo key = city[pos];        // city to be sorted
       int index = pos;                 // current position
 
       /********************   Start sortCity method  *****************/
@@ -307,36 +355,40 @@ public class StateInfo
    } //end sortCity method
 
    /**********************************************************
-    * Method Name    : removeCities
+    * Method Name    : removeCity
     * Author         : Shao yu Cheng
     * Date           : Mar 31 , 2017
     * Course/Section : CSC 264 - 001
     * Program Description: To remove the city from array.
     *
-    * BEGIN removeCities
+    * BEGIN removeCity
     *    decrease state population by city population
     *    remove city from array
     *    FOR()
     *       move cities forward
     *    END FOR
     *    reduce 1 from number of cities
-    * END removeCities
+    * END removeCity
     **********************************************************/
-   public void removeCities(int index)
+   public void removeCity(int index)
    {
       // decrease state population by city population
-      statePop -= city[index].getPop();
+      statePop -= city[index - 1].getPop();
 
       //remove city from array
-      city [index] = null;
+      city [index - 1] = null;
 
       //FOR()
-      for (int i = index; i < numCities; i++)
+      for (int i = index - 1; i < numCities; i++)
       {
          //move cities forward
          city [i] = city [i+1];
       } //END FOR
-   } // end removeCities
+
+      // reduce 1 from number of cities
+      numCities--;
+
+   } // end removeCity
 
    /**********************************************************
     * Method Name    : toString
