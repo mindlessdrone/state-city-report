@@ -707,7 +707,7 @@ public class Driver
                   } //END IF
 
                   // blank space
-                  System.out.println("\n\n");
+                  System.out.println("\n\n\t\t\tList of Cities\n");
                   
                   // print list of cities
                   for (int i = 0; i < states[choice - 1].getNumCities(); i++)
@@ -718,10 +718,10 @@ public class Driver
                   } // end for
 
                   // blank space
-                  System.out.println("\n\n");
+                  System.out.println("");
 
                   //get city choice
-                  System.out.print("\t\tEnter City to Remove (-1 to Quit): ");
+                  System.out.print("\n\t\tEnter City to Remove (-1 to Quit): ");
                   cityChoice = Keyboard.readInt();
                } //END WHILE
 
