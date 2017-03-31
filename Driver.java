@@ -721,7 +721,7 @@ public class Driver
                   System.out.println("");
 
                   //get city choice
-                  System.out.print("\n\t\tEnter City to Remove (-1 to Quit): ");
+                  System.out.print("\t\tEnter City to Remove (-1 to Quit): ");
                   cityChoice = Keyboard.readInt();
                } //END WHILE
 
