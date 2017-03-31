@@ -864,7 +864,7 @@ public class Driver
          if (fileName != QUIT)
          {
             // blank space
-            System.out.println("\n\t\t\tStates Report\n");
+            System.out.println("\n\n\t\t\tStates Report\n");
 
             //FOR ()
             for (int i = 0; i < numState; i++)
