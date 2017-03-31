@@ -864,7 +864,7 @@ public class Driver
          if (fileName != QUIT)
          {
             // blank space
-            System.out.print("\n\n\n");
+            System.out.println("\n\t\t\tStates Report\n");
 
             //FOR ()
             for (int i = 0; i < numState; i++)
@@ -875,7 +875,7 @@ public class Driver
             } //END FOR
 
             // blank space
-            System.out.print("\n\n\n");
+            System.out.print("\n");
 
             //close the buffered writer
             bw.close();
