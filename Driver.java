@@ -167,7 +167,7 @@ public class Driver
       System.out.print("\t\t0 : Quit\n\t\t");
 
       //get choice from user
-      System.out.println("\nEnter Selection : ");
+      System.out.println("\n\t\tEnter Selection : ");
       choice = Keyboard.readInt();
 
       //return user choice
