@@ -394,7 +394,9 @@ public class Driver
          //get state's name  and print
          System.out.println("\t\t" + (i+1) + ". " + states[i].getName());
       } //END FOR
-
+      
+      //print new line
+      System.out.println("");
    } //END listStates
 
    /**********************************************************
