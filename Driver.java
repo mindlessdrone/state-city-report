@@ -669,7 +669,7 @@ public class Driver
             {
                
                // blank space
-               System.out.println("\n\n");
+               System.out.println("\nList of Cities\n");
 
                // print list of cities
                for (int i = 0; i < states[choice - 1].getNumCities(); i++)
