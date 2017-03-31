@@ -386,7 +386,7 @@ public class Driver
       /***************************************************/
 
       //print states list msg
-      System.out.println("\n\n\t\tList of States: ");
+      System.out.println("\n\n\t\t\tList of States: ");
 
       //FOR ()
       for (int i = 0; i < numState; i++)
@@ -395,8 +395,6 @@ public class Driver
          System.out.println("\t\t" + (i+1) + ". " + states[i].getName());
       } //END FOR
 
-      //print new line
-      System.out.println("\n");
    } //END listStates
 
    /**********************************************************
