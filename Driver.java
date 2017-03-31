@@ -4,7 +4,7 @@ import java.io.*;
  * Program Name   : States-citiesIO
  * Author         : Shao yu Cheng, Anthony Massacci
  * Date           : Mar 31 , 2017
- * Course/Section : CSC 264 - 001
+A * Course/Section : CSC 264 - 001
  * Program Description: The program will ask user to insert
  *    a file which writes States, cities, and city's population.
  *    List of menu to ask user if wants to do any changes, then
@@ -14,7 +14,7 @@ import java.io.*;
  *
  * Methods: 
  *       + menu() 								                         : int
- *       + readFile(int numStates, stateInfo states[])             : int
+  *       + readFile(int numStates, stateInfo states[])             : int
  *			+ listStates(int numState, stateInfo states[])	          : void
  *			+ modState(int numState, stateInfo states[])	             : void
  *			+ modCity(int numState, stateInfo states[])               : void
@@ -136,7 +136,7 @@ public class Driver
 
    /**********************************************************
     * Method Name    : menu
-    * Author         : Shao yu Cheng
+    * Author         : Shao yu Cheng, Alexander Kim
     * Date           : Mar 31 , 2017
     * Course/Section : CSC 264 - 001
     * Program Description: To print menu and get choice from user.
@@ -365,7 +365,7 @@ public class Driver
 
    /**********************************************************
     * Method Name    : listStates
-    * Author         : Shao yu Cheng
+    * Author         : Shao yu Cheng, Alexander Kim
     * Date           : Mar 31 , 2017
     * Course/Section : CSC 264 - 001
     * Program Description: To print the list of States.
@@ -818,7 +818,7 @@ public class Driver
 
    /**********************************************************
     * Method Name    : proReport
-    * Author         : Shao yu Cheng
+    * Author         : Shao yu Cheng, Alexander Kim
     * Date           : Mar 31 , 2017
     * Course/Section : CSC 264 - 001
     * Program Description: To produce the final report.
@@ -845,7 +845,8 @@ public class Driver
       final String QUIT = "-1";   //quit value
 
       //local variables
-      String fileName;            //report file's name
+      String 	fileName,         //report file's name
+      			stateName;		  //state's name
       BufferedWriter bw;          //buffered writer to write the text to file
 
       /*******************************************************************/
@@ -869,8 +870,12 @@ public class Driver
             //FOR ()
             for (int i = 0; i < numState; i++)
             {
+				//store state name
+				stateName = states[i].getName();
+
                //write states and cities' name and population into file
-               System.out.println("\t\t" + states[i].getName() + "\t\t" + states[i].getPop());
+               System.out.println("\t\t" + stateName +
+               					  Util.setRight((30 - stateName.length()), "" + states[i].getPop()));
                bw.write(states[i].toString());
             } //END FOR
 
