@@ -854,7 +854,7 @@ public class Driver
       if (numState > 0)
       {
          //ask for file's name
-         System.out.print("\t\tEnter File Name (-1 to Quit): ");
+         System.out.print("\n\t\tEnter File Name (-1 to Quit): ");
          fileName = Keyboard.readString();
 
          //call new buffered writer
