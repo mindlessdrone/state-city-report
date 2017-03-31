@@ -338,8 +338,7 @@ public class Driver
                      }
                   } catch (NumberFormatException ex)
                   {
-                     // population token was not numeric, print error
-                     System.err.printf("\n\t\t<ERROR: Population Value is Non-Numeric on " +
+                     // population token was not numeric, print error                     System.err.printf("\n\t\t<ERROR: Population Value is Non-Numeric on " +
                            "Line:\t%s>\n", line);
                   } // end try-catch
                } // end if
@@ -349,7 +348,7 @@ public class Driver
             } // end while
          } 
          catch(FileNotFoundException ex)
-         {
+n         {
             // the file could not be found, print error message
             System.err.printf("\n\t\t<ERROR: File %s Not Found.>\n", fileName);
          }      
@@ -359,7 +358,7 @@ public class Driver
          fileName = Keyboard.readString();
       } // end while
 
-      // Return numStates  
+\      // Return numStates  
       return numStates;
    } // end readFile method
 
@@ -386,7 +385,7 @@ public class Driver
       /***************************************************/
 
       //print states list msg
-      System.out.println("\n\n\t\t\tList of States: ");
+      System.out.println("\n\n\t\t\tList of States\n");
 
       //FOR ()
       for (int i = 0; i < numState; i++)
@@ -457,7 +456,7 @@ public class Driver
             if (0 < choice && choice <= numState)
             {
                //get state's new name
-               System.out.print("\t\tEnter New Name for State: ");
+               System.out.print("\n\t\tEnter New Name for State: ");
                newName = Keyboard.readString();
 
                //IF (new name is not null)
