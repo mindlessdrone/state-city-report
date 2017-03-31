@@ -158,7 +158,7 @@ public class Driver
       /*****************************************************************************/
 
       //list of menu
-      System.out.println("\n\n\t\t\tMain Menu");
+      System.out.println("\n\n\t\t\tMain Menu\n");
       System.out.println("\t\t1 : Read File(s)");
       System.out.println("\t\t2 : Modify State Information");
       System.out.println("\t\t3 : Remove State");
@@ -167,7 +167,7 @@ public class Driver
       System.out.print("\t\t0 : Quit\n\t\t");
 
       //get choice from user
-      System.out.println("Enter Selection : ");
+      System.out.println("\nEnter Selection : ");
       choice = Keyboard.readInt();
 
       //return user choice
