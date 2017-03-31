@@ -123,7 +123,7 @@ public class Driver
          else
          {
             //output invalid choice msg
-            System.out.println("\t\tYour choice is invalid. Please enter again.");
+            System.out.println("\n\t\t<ERROR: Invalid Choice.>");
          } //END IF
 
          //call menu method and get returned choice
@@ -131,7 +131,7 @@ public class Driver
       } //END WHILE
 
       //output closing program msg
-      System.out.println("\n\t\tThe program is closed. Have a nice day.");
+      System.out.println("\n\t\t<Program Closed. Have a Nice Day!>\n");
    } //END main
 
    /**********************************************************
@@ -158,16 +158,16 @@ public class Driver
       /*****************************************************************************/
 
       //list of menu
-      System.out.println("\n\n\t\tHello, menu is below, please input your choice:");
-      System.out.println("\t\t1. READ A FILE.");
-      System.out.println("\t\t2. MODIFY STATE INFORMATION.");
-      System.out.println("\t\t3. REMOVE STATE.");
-      System.out.println("\t\t4. REMOVE CITY.");
-      System.out.println("\t\t5. PRODUCE REPORTS.");
-      System.out.print("\t\t0. QUIT.\n\t\t");
+      System.out.println("\n\n\t\t\tMain Menu");
+      System.out.println("\t\t1 : Read File(s)");
+      System.out.println("\t\t2 : Modify State Information");
+      System.out.println("\t\t3 : Remove State");
+      System.out.println("\t\t4 : Remove City");
+      System.out.println("\t\t5 : Produce Report");
+      System.out.print("\t\t0 : Quit\n\t\t");
 
       //get choice from user
-      System.out.print("Please enter a selection :\t");
+      System.out.println("Enter Selection : ");
       choice = Keyboard.readInt();
 
       //return user choice
@@ -247,7 +247,7 @@ public class Driver
       /***********************Start readFile method*********************************/
 
       // Ask user for file name
-      System.out.print("\n\t\tPlease enter a file to read from (-1 to quit): ");
+      System.out.print("\n\t\tEnter File to Read (-1 to Quit): ");
       fileName = Keyboard.readString();
 
       // while file name is not quit
@@ -269,7 +269,7 @@ public class Driver
                tokens = line.split("\\t");
 
                // if line is a state line
-               if (tokens.length == 1)
+n               if (tokens.length == 1)
                {
                   // set name to first token
                   name = tokens[0];
@@ -302,8 +302,8 @@ public class Driver
                   else
                   {
                      // states is full display error
-                     System.err.printf("ERROR: State, %s was not " +
-                           "added. State list is full\n",
+                     System.err.printf("\n\t\t<ERROR: State, %s was Not " +
+                           "Added. State List is Full!>\n",
                            name);
 
                      // set index to error/blank state
@@ -332,15 +332,15 @@ public class Driver
                      else
                      {
                         // Display error
-                        System.err.printf("ERROR: City %s was not " +
-                              "added. No state to add it to.\n",
+                        System.err.printf("\n\t\t<ERROR: City %s was Not " +
+                              "Added. No State Found.>\n",
                               name);
                      }
                   } catch (NumberFormatException ex)
                   {
                      // population token was not numeric, print error
-                     System.err.printf("ERROR: population value is not numeric on " +
-                           "line:\t%s\n", line);
+                     System.err.printf("\n\t\t<ERROR: Population Value is Non-Numeric on " +
+                           "Line:\t%s>\n", line);
                   } // end try-catch
                } // end if
                // read line from file
@@ -351,11 +351,11 @@ public class Driver
          catch(FileNotFoundException ex)
          {
             // the file could not be found, print error message
-            System.err.printf("ERROR: the file %s could not be found.\n", fileName);
+            System.err.printf("\n\t\t<ERROR: File %s Not Found.>\n", fileName);
          }      
 
          // Ask user for file name
-         System.out.print("\n\t\tPlease enter a file to read from (-1 to quit): ");
+         System.out.print("\n\t\tEnter File to Read (-1 to Quit): ");
          fileName = Keyboard.readString();
       } // end while
 
@@ -386,7 +386,7 @@ public class Driver
       /***************************************************/
 
       //print states list msg
-      System.out.println("\n\n\t\tThe list of States: ");
+      System.out.println("\n\n\t\tList of States: ");
 
       //FOR ()
       for (int i = 0; i < numState; i++)
@@ -447,7 +447,7 @@ public class Driver
          listStates(numState, states);
 
          //get choice from user
-         System.out.print("\t\tEnter the choice of the State you want to modify (or -1 to QUIT): ");
+         System.out.print("\t\tSelect State to Modify (-1 to Quit): ");
          choice = Keyboard.readInt();
 
          //WHILE (choice is not quit)
@@ -457,7 +457,7 @@ public class Driver
             if (0 < choice && choice <= numState)
             {
                //get state's new name
-               System.out.print("\t\tEnter the name will be changed to: ");
+               System.out.print("\t\tEnter New Name for State: ");
                newName = Keyboard.readString();
 
                //IF (new name is not null)
@@ -465,14 +465,14 @@ public class Driver
                {
                   //set state's name to new name and print success msg
                   states[choice - 1].setName(newName);
-                  System.out.println("\t\tChanging name is success.\n");
+                  System.out.println("\n\t\t<Name Changed Successfully.>\n");
                }
 
                //ELSE
                else
                {
                   //print error msg
-                  System.out.println("\t\tThe name is invalid.");
+                  System.out.println("\n\t\t<ERROR: Invalid Name.>\n");
                } //END IF
             }
 
@@ -480,14 +480,14 @@ public class Driver
             else
             {
                //print error msg
-               System.out.println("\t\tThe choice is invalid.");
+               System.out.println("\n\t\t<ERROR: Invalid Choice.>\n");
             } //END IF
 
             //call listStates method
             listStates(numState, states);
 
             //get choice from user
-            System.out.print("\t\tEnter the choice of the State you want to modify (or -1 to QUIT): ");
+            System.out.print("\t\tEnter State to Modify (-1 to Quit): ");
             choice = Keyboard.readInt();
          } //END WHILE
 
@@ -497,7 +497,7 @@ public class Driver
       else
       {
          //print error msg
-         System.out.println ("\t\tThere's no States in the file.");
+         System.out.println ("\n\t\t<ERROR: No States in File.>\n");
       } //END IF
 
    } //END modState
@@ -550,7 +550,7 @@ public class Driver
          listStates(numState, states);
 
          //get state choice of user
-         System.out.print("\t\tEnter the choice of the State you want to remove(or -1 to QUIT): ");
+         System.out.print("\t\tEnter State to Remove (-1 to Quit): ");
          choice = Keyboard.readInt();
 
          //WHILE (choice is not quit)
@@ -573,21 +573,21 @@ public class Driver
                numState--;
 
                //print success msg
-               System.out.println("\t\tThe State is removed.");
+               System.out.println("\n\t\t<State Removed Successfully.>\n");
             }
 
             //ELSE
             else
             {
                //print error msg
-               System.out.println("\t\tThe choice is invalid.");
+               System.out.println("\n\t\t<ERROR: Invalid Choice>\n");
             } //END IF
 
             //call listStates method
             listStates(numState, states);
 
             //get state choice of user
-            System.out.print("\t\tEnter the choice of the State you want to remove(or -1 to QUIT): ");
+            System.out.print("\t\tEnter State to Remove (-1 to Quit): ");
             choice = Keyboard.readInt();
          } //END WHILE
       }
@@ -596,7 +596,7 @@ public class Driver
       else
       {
          //print error msg
-         System.out.println("\t\tThere's no States in the file.");
+         System.out.println("\n\t\t<ERROR: No States in File.>\n");
       } //END IF
 
       //return the new number of states
@@ -658,8 +658,7 @@ public class Driver
          listStates(numState, states);
 
          //get state choice of user
-         System.out.print("\t\tEnter the choice of the State where the city at " +
-               "that you want to remove(or -1 to QUIT): ");
+         System.out.print("\t\tEnter State of City to Be Removed (-1 to Quit): ");
          choice = Keyboard.readInt();
 
          //WHILE (choice is not quit)
@@ -684,7 +683,7 @@ public class Driver
                System.out.println("\n");
                
                //get city choice
-               System.out.print("\t\tEnter the choice of the City you want to remove (or -1 to QUIT): ");
+               System.out.print("\t\tEnter City to Remove (-1 to Quit): ");
                cityChoice = Keyboard.readInt();
 
                //WHILE (city choice is not quit)
@@ -697,14 +696,14 @@ public class Driver
                      states[choice - 1].removeCity(cityChoice);
 
                      //print success msg
-                     System.out.println("\t\tCity is removed.");
+                     System.out.println("\n\t\t<City Removed Successfully.>\n");
                   }
 
                   //ELSE
                   else
                   {
                      //print error msg
-                     System.out.println("\t\tThe choice is invalid.");
+                     System.out.println("\n\t\t<ERROR: Invalid Choice.>\n");
                   } //END IF
 
                   // blank space
@@ -722,7 +721,7 @@ public class Driver
                   System.out.println("\n\n");
 
                   //get city choice
-                  System.out.print("\t\tEnter the choice of the City you want to remove (or -1 to QUIT): ");
+                  System.out.print("\t\tEnter City to Remove (-1 to Quit): ");
                   cityChoice = Keyboard.readInt();
                } //END WHILE
 
@@ -734,14 +733,14 @@ public class Driver
             else
             {
                //print error msg
-               System.out.println("\t\tThe choice is invalid.");
+               System.out.println("\n\t\t<ERROR: Invalid Choice.>\n");
             } //END IF
 
             //call listStates method
             listStates(numState, states);
 
             //get state choice
-            System.out.print("\t\tEnter the choice of the State where the city at that you want to remove(or -1 to QUIT): ");
+            System.out.print("\t\tEnter State of City to be Removed (-1 to Quit): ");
             choice = Keyboard.readInt();
          } //END WHILE
 
@@ -751,7 +750,7 @@ public class Driver
       else
       {
          //print error msg
-         System.out.println("\t\tThere's no States in the file.");
+         System.out.println("\n\t\t<ERROR: No States in File.>\n");
       } //END IF
    } //END rmvCity
 
@@ -855,7 +854,7 @@ public class Driver
       if (numState > 0)
       {
          //ask for file's name
-         System.out.print("\t\tEnter the file's name (or -1 to quit): ");
+         System.out.print("\t\tEnter File Name (-1 to Quit): ");
          fileName = Keyboard.readString();
 
          //call new buffered writer
@@ -882,7 +881,7 @@ public class Driver
             bw.close();
 
             //print success msg
-            System.out.println("\t\tThe final report file is produced.");
+            System.out.println("\n\t\t<Report File Produced Successfully.>\n");
          } //END IF
       }
 
@@ -890,7 +889,7 @@ public class Driver
       else
       {
          //print error msg
-         System.out.println("\t\tThere's no States in the file.");
+         System.out.println("\n\t\t<ERROR: No States in File.>\n");
       } //END IF
 
    } //END proReport
