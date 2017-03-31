@@ -247,7 +247,7 @@ public class Driver
       /***********************Start readFile method*********************************/
 
       // Ask user for file name
-      System.out.print("Please enter a file to read from (-1 to quit): ");
+      System.out.print("\n\t\tPlease enter a file to read from (-1 to quit): ");
       fileName = Keyboard.readString();
 
       // while file name is not quit
@@ -355,7 +355,7 @@ public class Driver
          }      
 
          // Ask user for file name
-         System.out.print("Please enter a file to read from (-1 to quit): ");
+         System.out.print("\n\t\tPlease enter a file to read from (-1 to quit): ");
          fileName = Keyboard.readString();
       } // end while
 
